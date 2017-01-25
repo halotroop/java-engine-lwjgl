@@ -1,0 +1,11 @@
+{
+	"fps":60,
+	"window":{
+		"width":1024,
+		"height":728
+	},
+	"showfps_window":true,
+	"vsync":true,
+	"antialias":true,
+	"polygon_mode":false
+}
