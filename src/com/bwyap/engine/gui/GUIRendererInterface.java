@@ -5,6 +5,7 @@ import org.joml.Vector2f;
 import com.bwyap.engine.gui.element.Label;
 import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
+import com.bwyap.engine.gui.element.base.VectorScrollArea;
 import com.bwyap.engine.gui.element.base.VectorTextBox;
 import com.bwyap.engine.gui.element.base.VectorTextField;
 import com.bwyap.engine.window.WindowInterface;
@@ -43,6 +44,14 @@ public interface GUIRendererInterface {
 	 * @param parent the parent of the panel
 	 */
 	public void renderPanel(Panel panel, WindowInterface window, Vector2f parent);
+	
+	
+	/**
+	 * Render a scroll area and the elements contained within it
+	 * @param scrollArea
+	 * @param window
+	 */
+	public void renderScrollArea(VectorScrollArea scrollArea, WindowInterface window);
 	
 	
 	/**
