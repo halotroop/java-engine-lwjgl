@@ -89,10 +89,10 @@ public abstract class TextField extends SelectableElement implements ITextDispla
 	
 	
 	/**
-	 * Action to perform when the enter key is pressed 
+	 * Action to perform when the text field data is to be submitted 
 	 * @param text
 	 */
-	public abstract void onEnter(String text);
+	public abstract void onSubmit(String text);
 	
 	
 	@Override
@@ -186,24 +186,49 @@ public abstract class TextField extends SelectableElement implements ITextDispla
 		char c = input.consumeLastTypedChar();
 		if (c == '\b') {
 			// Remove a character if the key was backspace
-			if (showCaret && displayingCaret) {
-				if (text.getText().length() > 1) text.setText(text.getText().substring(0, text.getText().length() - 2) + "|");
-			}
-			else if (text.getText().length() > 1) text.setText(text.getText().substring(0, text.getText().length() - 2) + " ");
+			removeChar();		
 		}
 		else if (c == '\n') {
 			// Call the enter method if the enter key was pressed
-			if (showCaret) onEnter(text.getText().substring(0, text.getText().length() - 1));
-			else onEnter(text.getText());
+			enterPressed();
 		}
 		else if (c != 0) {
 			// Add a character to the text field
-			if (showCaret) {
-				if (displayingCaret) text.setText(text.getText().substring(0, text.getText().length() - 1) + c + "|");
-				else text.setText(text.getText().substring(0, text.getText().length() - 1) + c + " ");
-			}
-			else text.setText(text.getText() + c);
+			putChar(c);
 		}
 	}
 	
+	
+	/**
+	 * Add a character to the text field
+	 * @param c
+	 */
+	protected final void putChar(char c) {
+		if (showCaret) {
+			if (displayingCaret) text.setText(text.getText().substring(0, text.getText().length() - 1) + c + "|");
+			else text.setText(text.getText().substring(0, text.getText().length() - 1) + c + " ");
+		}
+		else text.setText(text.getText() + c);
+	}
+	
+	
+	/**
+	 * Remove a character from the text field
+	 */
+	protected final void removeChar() {
+		if (showCaret && displayingCaret) {
+			if (text.getText().length() > 1) text.setText(text.getText().substring(0, text.getText().length() - 2) + "|");
+		}
+		else if (text.getText().length() > 1) text.setText(text.getText().substring(0, text.getText().length() - 2) + " ");
+	}
+	
+	
+	/**
+	 * Action to perform when the enter key is pressed
+	 */
+	protected void enterPressed() {
+		// Call the enter method if the enter key was pressed
+		if (showCaret) onSubmit(text.getText().substring(0, text.getText().length() - 1));
+		else onSubmit(text.getText());
+	}
 }

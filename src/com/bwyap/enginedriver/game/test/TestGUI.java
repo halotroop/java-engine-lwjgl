@@ -75,7 +75,7 @@ public class TestGUI extends NVGGUI {
 		
 		RoundedRectangularTextfield field = new RoundedRectangularTextfield(200, 100, 200, 25, 5) {
 			@Override
-			public void onEnter(String text) {				
+			public void onSubmit(String text) {				
 				System.out.println("Enter pressed: " + text);
 			}
 		};
@@ -86,7 +86,7 @@ public class TestGUI extends NVGGUI {
 		addElement(field);
 		
 		
-		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 400, 300, 200, 5) {
+		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 300, 200, 5) {
 			@Override
 			protected void initElements() { }
 		};
@@ -128,9 +128,9 @@ public class TestGUI extends NVGGUI {
 		
 		addElement(panel);		
 		
-		RoundedRectangularTextBox textbox = new RoundedRectangularTextBox(5, 280, 300, 100, 5, 5) {
+		RoundedRectangularTextBox textbox = new RoundedRectangularTextBox(0, 0, 300, 100, 5, 5) {
 			@Override
-			public void onEnter(String text) {
+			public void onSubmit(String text) {
 				System.out.println("Enter pressed on textbox");
 			} 
 		};
@@ -144,6 +144,7 @@ public class TestGUI extends NVGGUI {
 		textbox.setEditable(true);
 		
 		panel.addElement(textbox);
+	
 	}
 	
 
