@@ -25,12 +25,12 @@ import com.bwyap.engine.window.WindowInterface;
  * 	<li>Panel</li>
  * 	<li>Window panel</li>
  * 	<li>Label</li>
+ * 	<li>Text box</li>
+ * 	<li>Scroll area</li>
  * </ul>
  * 
  * TODO:
  * <ul>
- * 	<li>Text area</li>
- * 	<li>Scroll area</li>
  * 	<li>Drop down list</li>
  * 	<li>List/table</li>
  * 	<li>Tabbed panels</li>

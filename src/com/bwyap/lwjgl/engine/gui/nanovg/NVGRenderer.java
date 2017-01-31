@@ -54,6 +54,7 @@ import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.VectorButton;
+import com.bwyap.engine.gui.element.base.VectorScrollArea;
 import com.bwyap.engine.gui.element.base.VectorTextBox;
 import com.bwyap.engine.gui.element.base.VectorTextField;
 import com.bwyap.engine.gui.element.properties.TextComponent;
@@ -169,6 +170,7 @@ public class NVGRenderer extends GUIRenderer {
 			
 			// Render element
 			if (e instanceof Button) renderButton((Button)e);
+			else if (e instanceof VectorScrollArea) renderScrollArea((VectorScrollArea)e, window);
 			else if (e instanceof Panel) renderPanel((Panel)e, window, panel.getPosition());
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
@@ -201,6 +203,13 @@ public class NVGRenderer extends GUIRenderer {
 	@Override
 	public void renderLabel(Label label) {
 		renderText(label.getTextComponent(), label);
+	}
+	
+	
+	//TODO
+	public void renderScrollArea(VectorScrollArea scrollArea, WindowInterface window) {
+		renderPanel(scrollArea, window, scrollArea.getPosition());
+		
 	}
 	
 	

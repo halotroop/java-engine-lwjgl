@@ -2,6 +2,7 @@ package com.bwyap.enginedriver.game.test;
 
 import com.bwyap.engine.gui.element.EllipticalButton;
 import com.bwyap.engine.gui.element.RectangularButton;
+import com.bwyap.engine.gui.element.RectangularScrollArea;
 import com.bwyap.engine.gui.element.RoundedRectangularButton;
 import com.bwyap.engine.gui.element.RoundedRectangularPanel;
 import com.bwyap.engine.gui.element.RoundedRectangularPanelWindow;
@@ -10,6 +11,7 @@ import com.bwyap.engine.gui.element.RoundedRectangularTextfield;
 import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.ETextAlignment;
 import com.bwyap.engine.gui.element.base.PanelWindow;
+import com.bwyap.engine.gui.element.base.ScrollArea.ScrollDirection;
 import com.bwyap.enginedriver.resource.Resource;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGGUI;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGRenderer;
@@ -143,8 +145,15 @@ public class TestGUI extends NVGGUI {
 		//		+ "ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
 		textbox.setEditable(true);
 		
-		panel.addElement(textbox);
-	
+		//panel.addElement(textbox);
+		
+		
+		RectangularScrollArea scroll = new RectangularScrollArea(5, 300, 300, 100, 10, ScrollDirection.VERTICAL) {
+			
+		};
+		scroll.colourProperties().setColour(0.5f, 0.5f, 0.5f, 0.5f);
+		scroll.addElement(textbox);
+		addElement(scroll);
 	}
 	
 
