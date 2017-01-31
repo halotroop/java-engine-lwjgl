@@ -109,10 +109,24 @@ public class GLFWMouseHandler implements MouseHandlerInterface {
 	public double getMouseScrollX() {
 		return scrollX;
 	}
+	
+	@Override
+	public double consumeMouseScrollX() {
+		double x = scrollX;
+		scrollX = 0;
+		return x;
+	}
 
 	@Override
 	public double getMouseScrollY() {
 		return scrollY;
+	}
+	
+	@Override
+	public double consumeMouseScrollY() {
+		double y = scrollY;
+		scrollY = 0;
+		return y;
 	}
 
 	@Override

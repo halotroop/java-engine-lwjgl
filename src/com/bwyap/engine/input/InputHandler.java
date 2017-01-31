@@ -60,8 +60,18 @@ public class InputHandler implements KeyboardHandlerInterface, MouseHandlerInter
 	}
 
 	@Override
+	public double consumeMouseScrollX() {
+		return mouseHandler.consumeMouseScrollX();
+	}
+	
+	@Override
 	public double getMouseScrollY() {
 		return mouseHandler.getMouseScrollY();
+	}
+
+	@Override
+	public double consumeMouseScrollY() {
+		return mouseHandler.consumeMouseScrollY();
 	}
 
 	@Override

@@ -44,12 +44,26 @@ public interface MouseHandlerInterface {
 	 * @return
 	 */
 	public double getMouseScrollX();
+
+	/**
+	 * Gets the mouse scroll x value
+	 * and resets it to 0
+	 * @return
+	 */
+	public double consumeMouseScrollX();
 	
 	/**
 	 * Gets the mouse scroll y value
 	 * @return
 	 */
 	public double getMouseScrollY();
+	
+	/**
+	 * Gets the mouse scroll y value
+	 * and resets it to 0
+	 * @return
+	 */
+	public double consumeMouseScrollY();
 	
 	/**
 	 * Get the last time a mouse scroll was invoked
