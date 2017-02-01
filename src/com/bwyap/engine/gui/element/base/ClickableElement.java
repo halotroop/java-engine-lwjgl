@@ -20,6 +20,7 @@ public abstract class ClickableElement extends GUIElement implements MouseDownIn
 	
 	protected List<Integer> acceptedButtons;
 	
+	protected boolean mouseOverReact;
 	protected boolean mouseOver;
 	protected int currentClick;
 	
@@ -28,6 +29,7 @@ public abstract class ClickableElement extends GUIElement implements MouseDownIn
 		super(x, y, width, height);
 		this.currentClick = -1;
 		this.acceptedButtons = new ArrayList<Integer>();
+		mouseOverReact = true;
 		
 		// Default accepted buttons are mouse left and mouse right
 		acceptedButtons.add(Resource.inputMapping.getBinding(InputMapping.MOUSE_LEFT));
@@ -42,7 +44,7 @@ public abstract class ClickableElement extends GUIElement implements MouseDownIn
 			if (bounds.withinBounds((float)input.getMouseX(), (float)input.getMouseY()) && 
 					withinBounds((int)input.getMouseX(), (int)input.getMouseY())) {
 				mouseOver = true;
-				onMouseOver((int)input.getMouseX(), (int)input.getMouseY());
+				if (mouseOverReact) onMouseOver((int)input.getMouseX(), (int)input.getMouseY());
 			}
 			else mouseOver = false;
 			
@@ -91,6 +93,22 @@ public abstract class ClickableElement extends GUIElement implements MouseDownIn
 	 * @param bounds
 	 */
 	public abstract void onHandleInput(InputHandler input, GUIBoundsInterface bounds);
+	
+	
+	@Override
+	public boolean mouseOverReact() {
+		return mouseOverReact;
+	}
+	
+	
+	/**
+	 * Set whether the element should react when the mouse is over the element.
+	 * The {@code onMouseClicked} method should still work when {@code mouseOverReact} is {@code false}.
+	 * @param mouseOverReact
+	 */
+	public void setReactToMouseOver(boolean mouseOverReact) {
+		this.mouseOverReact = mouseOverReact;
+	}
 	
 	
 	@Override

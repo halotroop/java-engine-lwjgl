@@ -17,4 +17,12 @@ public interface MouseOverInterface {
 	 */
 	public boolean isMouseOver();
 	
+	
+	/**
+	 * Check whether this element reacts to having the mouse over the element.
+	 * The {@code onMouseClicked} method should still work when {@code mouseOverReact} is {@code false}.
+	 * @return
+	 */
+	public boolean mouseOverReact();
+	
 }
