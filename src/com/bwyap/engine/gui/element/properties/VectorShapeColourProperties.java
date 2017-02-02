@@ -28,7 +28,6 @@ public class VectorShapeColourProperties implements GUIProperty {
 	}
 	
 	
-	
 	/**
 	 * Set the colour of the shape
 	 * @param r
@@ -41,6 +40,14 @@ public class VectorShapeColourProperties implements GUIProperty {
 		this.colour.y = g;
 		this.colour.z = b;
 		this.colour.w = a;
+	}
+	
+	/**
+	 * Set the colour of the shape
+	 * @param colour
+	 */
+	public void setColour(Vector4f colour) {
+		setColour(colour.x, colour.y, colour.z, colour.w);
 	}
 	
 	/**
@@ -66,6 +73,14 @@ public class VectorShapeColourProperties implements GUIProperty {
 	}
 	
 	/**
+	 * Set the colour of the shape when it is selected
+	 * @param colour
+	 */
+	public void setSelectedColour(Vector4f colour) {
+		setSelectedColour(colour.x, colour.y, colour.z, colour.w);
+	}
+	
+	/**
 	 * Get the colour of the shape
 	 * @return
 	 */
@@ -88,6 +103,14 @@ public class VectorShapeColourProperties implements GUIProperty {
 	}	
 	
 	/**
+	 * Set the colour of the shape when the mouse is over it
+	 * @param colour
+	 */
+	public void setMouseoverColour(Vector4f colour) {
+		setMouseoverColour(colour.x, colour.y, colour.z, colour.w);
+	}
+	
+	/**
 	 * Get the colour of the shape when the mouse is over it
 	 * @return
 	 */
@@ -107,6 +130,14 @@ public class VectorShapeColourProperties implements GUIProperty {
 		this.mouseDownColour.y = g;
 		this.mouseDownColour.z = b;
 		this.mouseDownColour.w = a;
+	}
+	
+	/**
+	 * Set the colour of the shape when the mouse is pressing it
+	 * @param colour
+	 */
+	public void setMouseDownColour(Vector4f colour) {
+		setMouseDownColour(colour.x, colour.y, colour.z, colour.w);
 	}
 	
 	/**
@@ -132,6 +163,14 @@ public class VectorShapeColourProperties implements GUIProperty {
 	}
 	
 	/**
+	 * Set the colour of the border
+	 * @param colour
+	 */
+	public void setBorderColour(Vector4f colour) {
+		setBorderColour(colour.x, colour.y, colour.z, colour.w);
+	}
+	
+	/**
 	 * Get the colour of the border
 	 * @return
 	 */
@@ -151,6 +190,14 @@ public class VectorShapeColourProperties implements GUIProperty {
 		this.borderMouseoverColour.y = g;
 		this.borderMouseoverColour.z = b;
 		this.borderMouseoverColour.w = a;
+	}
+	
+	/**
+	 * Set the colour of the border when the mouse is over the shape
+	 * @param colour
+	 */
+	public void setBorderMouseoverColour(Vector4f colour) {
+		setBorderMouseoverColour(colour.x, colour.y, colour.z, colour.w);
 	}
 	
 	/**
