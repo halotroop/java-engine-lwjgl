@@ -117,7 +117,7 @@ public abstract class GUIRenderer implements GUIRendererInterface {
 	 * @param shape
 	 * @param e
 	 */
-	protected abstract void renderColouredVectorShape(IColouredVectorShape shape, GUIBoundsInterface e);
+	protected abstract void renderColouredVectorShape(IColouredVectorShape shape, GUIBoundsInterface e, float offsetX, float offsetY);
 
 	
 }

@@ -18,10 +18,9 @@ import static org.lwjgl.nanovg.NanoVG.nvgFontSize;
 import static org.lwjgl.nanovg.NanoVG.nvgGlobalAlpha;
 import static org.lwjgl.nanovg.NanoVG.nvgImagePattern;
 import static org.lwjgl.nanovg.NanoVG.nvgIntersectScissor;
-import static org.lwjgl.nanovg.NanoVG.nvgRect;
 import static org.lwjgl.nanovg.NanoVG.nvgResetScissor;
+import static org.lwjgl.nanovg.NanoVG.nvgRect;
 import static org.lwjgl.nanovg.NanoVG.nvgRoundedRect;
-import static org.lwjgl.nanovg.NanoVG.nvgScissor;
 import static org.lwjgl.nanovg.NanoVG.nvgStroke;
 import static org.lwjgl.nanovg.NanoVG.nvgStrokeColor;
 import static org.lwjgl.nanovg.NanoVG.nvgStrokeWidth;
@@ -39,6 +38,7 @@ import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -155,16 +155,16 @@ public class NVGRenderer extends GUIRenderer {
 		
 		panel.updateBounds(window, parent);
 		renderColouredVectorShape(panel, panel);
-
+		
+		if (panel.isClip()) {
+			pushScissor(getContext(), 
+					panel.getPositionX() + panel.getPaddingLeft(), 
+					panel.getPositionY() + panel.getPaddingTop(), 
+					panel.getBounds().x - panel.getPaddingRight(), 
+					panel.getBounds().y - panel.getPaddingBottom());
+		}
+		
 		for (GUIElementInterface e : panel.getElements()) {
-			if (panel.isClip()) {
-				nvgScissor(getContext(), 
-						panel.getPositionX() + panel.getPaddingLeft(), 
-						panel.getPositionY() + panel.getPaddingTop(), 
-						panel.getBounds().x - panel.getPaddingRight(), 
-						panel.getBounds().y - panel.getPaddingBottom());
-			}
-			
 			// Update the element's bounds
 			e.updateBounds(panel, panel.getPosition());
 			
@@ -175,6 +175,7 @@ public class NVGRenderer extends GUIRenderer {
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
+			
 		}
 		
 		// Render any text it may have
@@ -182,6 +183,7 @@ public class NVGRenderer extends GUIRenderer {
 			renderText(((ITextDisplay)panel).getTextComponent(), panel);
 		}
 		
+		popScissor(getContext());
 		nvgGlobalAlpha(getContext(), 1.0f);
 	}
 	
@@ -208,9 +210,11 @@ public class NVGRenderer extends GUIRenderer {
 	
 	@Override
 	public void renderScrollArea(VectorScrollArea scrollArea, WindowInterface window) {
-		renderPanel(scrollArea, window, scrollArea.getPosition());
+		// Render the panel contents
+		renderPanel(scrollArea, window, scrollArea.getPosition());	
 		
-		//TODO
+		// Render the scroll bar
+		if (scrollArea.renderScrollBar()) renderColouredVectorShape(scrollArea.getScrollBar(), scrollArea.getScrollBar());
 	}
 	
 	
@@ -250,7 +254,7 @@ public class NVGRenderer extends GUIRenderer {
 		nvgFontFace(getContext(), NVGFont.getFont(text.getFontName()).getName());
 		nvgFillColor(getContext(), rgba(text.getTextColour()));
 		
-		if (text.isClipText()) nvgIntersectScissor(getContext(), e.getPositionX(), e.getPositionY(), e.getBounds().x, e.getBounds().y);
+		if (text.isClipText()) pushScissor(getContext(), e.getPositionX(), e.getPositionY(), e.getBounds().x, e.getBounds().y);
 		
 		float xPos = 0, yPos = 0;
 		
@@ -305,7 +309,7 @@ public class NVGRenderer extends GUIRenderer {
 		if (text.isTextBox()) nvgTextBox(getContext(), xPos, yPos, text.getTextBoxWidth(), text.getText(), 0);
 		else nvgText(getContext(), xPos, yPos, text.getText(), 0);
 		
-		nvgResetScissor(getContext());
+		if (text.isClipText()) popScissor(getContext());
 	}
 	
 	
@@ -321,8 +325,16 @@ public class NVGRenderer extends GUIRenderer {
 	}
 	
 	
-	@Override
+	/**
+	 * Render a coloured vector shape to the screen (with no offset)
+	 */
 	protected void renderColouredVectorShape(IColouredVectorShape shape, GUIBoundsInterface e) {
+		renderColouredVectorShape(shape, e, 0, 0);
+	}
+	
+	
+	@Override
+	protected void renderColouredVectorShape(IColouredVectorShape shape, GUIBoundsInterface e, float offsetX, float offsetY) {
 		if (!shape.renderShape()) return;
 		
 		nvgBeginPath(getContext());
@@ -330,13 +342,13 @@ public class NVGRenderer extends GUIRenderer {
 		// Draw the vector shape
 		switch (shape.getShape()) {
 		case RECTANGLE:
-			nvgRect(getContext(), e.getPositionX(), e.getPositionY(), e.getWidth(), e.getHeight());
+			nvgRect(getContext(), offsetX + e.getPositionX(), offsetY + e.getPositionY(), e.getWidth(), e.getHeight());
 			break;
 		case ROUNDED_RECT:
-			nvgRoundedRect(getContext(), e.getPositionX(), e.getPositionY(), e.getWidth(), e.getHeight(), ((IVectorRoundedRect) e).getRadius());
+			nvgRoundedRect(getContext(), offsetX + e.getPositionX(),  offsetY + e.getPositionY(), e.getWidth(), e.getHeight(), ((IVectorRoundedRect) e).getRadius());
 			break;
 		case ELLIPSE:
-			nvgEllipse(getContext(), e.getPositionX() + e.getWidth(), e.getPositionY() + e.getHeight(), e.getWidth(), e.getHeight());
+			nvgEllipse(getContext(), offsetX + e.getPositionX() + e.getWidth(), offsetY + e.getPositionY() + e.getHeight(), e.getWidth(), e.getHeight());
 			break;
 		}
 		
@@ -345,7 +357,7 @@ public class NVGRenderer extends GUIRenderer {
 		boolean mouseDown = false;
 		boolean selected = false;
 		
-		if (e instanceof MouseOverInterface) mouseOver = ((MouseOverInterface)e).isMouseOver();		
+		if (e instanceof MouseOverInterface) mouseOver = ((MouseOverInterface)e).isMouseOver() && ((MouseOverInterface)e).mouseOverReact();		
 		if (e instanceof MouseDownInterface) mouseDown = ((MouseDownInterface)e).isMouseDown();
 		if (e instanceof ISelectable) selected = ((ISelectable)e).isSelected();
 		
@@ -389,6 +401,57 @@ public class NVGRenderer extends GUIRenderer {
 		nvgRoundedRect(getContext(), button.getPositionX(), button.getPositionY(), button.getWidth(), button.getHeight(), 5);
 		nvgFillPaint(getContext(), paint);
 		nvgFill(getContext());
+	}
+	
+	
+	/**
+	 * A class to represent bounds for a scissor rectangle
+	 * @author bwyap
+	 *
+	 */
+	private static class ScissorBounds {
+		final float x, y, w, h;
+		ScissorBounds(float x, float y, float w, float h) {
+			this.x = x;
+			this.y = y;
+			this.w = w;
+			this.h = h;
+		}
+	}
+	
+	private static ArrayList<ScissorBounds> scissorBoundsStack = new ArrayList<ScissorBounds>();
+	
+	
+	/**
+	 * Push a new scissor onto the scissor stack and intersect it with the current scissor
+	 * @param ctx
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
+	private static void pushScissor(long ctx, float x, float y, float w, float h) {
+		scissorBoundsStack.add(new ScissorBounds(x, y, w, h));
+		nvgIntersectScissor(ctx, x, y, w, h);
+	}
+	
+	
+	/**
+	 * Undo the last applied scissor
+	 * @param ctx
+	 */
+	private static void popScissor(long ctx) {
+		if (scissorBoundsStack.size() <= 1) {
+			if (scissorBoundsStack.size() == 1) scissorBoundsStack.clear();
+			nvgResetScissor(ctx);
+		}
+		else {
+			scissorBoundsStack.remove(scissorBoundsStack.size() - 1);
+			nvgResetScissor(ctx);
+			for (ScissorBounds b : scissorBoundsStack) {
+				nvgIntersectScissor(ctx, b.x, b.y, b.w, b.h);
+			}
+		}		
 	}
 	
 	

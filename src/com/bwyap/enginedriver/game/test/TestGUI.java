@@ -2,10 +2,10 @@ package com.bwyap.enginedriver.game.test;
 
 import com.bwyap.engine.gui.element.EllipticalButton;
 import com.bwyap.engine.gui.element.RectangularButton;
-import com.bwyap.engine.gui.element.RectangularScrollArea;
 import com.bwyap.engine.gui.element.RoundedRectangularButton;
 import com.bwyap.engine.gui.element.RoundedRectangularPanel;
 import com.bwyap.engine.gui.element.RoundedRectangularPanelWindow;
+import com.bwyap.engine.gui.element.RoundedRectangularScrollArea;
 import com.bwyap.engine.gui.element.RoundedRectangularTextBox;
 import com.bwyap.engine.gui.element.RoundedRectangularTextfield;
 import com.bwyap.engine.gui.element.TexturedButton;
@@ -38,7 +38,7 @@ public class TestGUI extends NVGGUI {
 		button.colourProperties().setHasBorder(true);
 		button.colourProperties().setBorderColour(0, 1, 1, 1);
 		button.getTextComponent().setFontName(Resource.defaultFont);
-		button.getTextComponent().setText("Press me now");
+		button.getTextComponent().setText("Press me now 123456789");
 		addElement(button);
 		
 		
@@ -88,15 +88,6 @@ public class TestGUI extends NVGGUI {
 		addElement(field);
 		
 		
-		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 300, 200, 5) {
-			@Override
-			protected void initElements() { }
-		};
-		window.setVisible(true);
-		window.setSelectable(false);
-		addElement(window);
-		
-		
 		RoundedRectangularPanel panel = new RoundedRectangularPanel(450, 10, 400, 400, 4);
 		panel.colourProperties().setColour(1, 1, 1, 0.5f);
 		panel.colourProperties().setMouseoverColour(1, 1, 1, 0.5f);
@@ -104,7 +95,7 @@ public class TestGUI extends NVGGUI {
 		panel.setSelectable(false);
 		
 		
-		PanelWindow window2 = new RoundedRectangularPanelWindow("Panel", 0, 0, 200, 200, 5) {
+		PanelWindow window2 = new RoundedRectangularPanelWindow("Panel", 300, 0, 200, 200, 5) {
 			@Override
 			protected void initElements() { }
 		};
@@ -144,16 +135,27 @@ public class TestGUI extends NVGGUI {
 		//		+ "aliqua. Ut enim ad minim veniam, quis nostrud exercitation "
 		//		+ "ullamco laboris nisi ut aliquip ex ea commodo consequat. ");
 		textbox.setEditable(true);
+		textbox.setReactToMouseOver(false);
 		
 		//panel.addElement(textbox);
 		
 		
-		RectangularScrollArea scroll = new RectangularScrollArea(5, 300, 300, 100, 10, ScrollDirection.VERTICAL) {
-			
-		};
+		RoundedRectangularScrollArea scroll = new RoundedRectangularScrollArea(10, 10, 300, 200, 25, ScrollDirection.VERTICAL, 4);
 		scroll.colourProperties().setColour(0.5f, 0.5f, 0.5f, 0.5f);
 		scroll.addElement(textbox);
-		addElement(scroll);
+		//addElement(scroll);
+		
+
+		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 350, 250, 5) {
+			@Override
+			protected void initElements() { }
+		};
+		window.setVisible(true);
+		window.setSelectable(false);
+		window.addElement(scroll);
+		window.setReactToMouseOver(false);
+		window.setResizable(true);
+		addElement(window);
 	}
 	
 
