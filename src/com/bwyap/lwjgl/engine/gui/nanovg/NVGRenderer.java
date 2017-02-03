@@ -18,8 +18,8 @@ import static org.lwjgl.nanovg.NanoVG.nvgFontSize;
 import static org.lwjgl.nanovg.NanoVG.nvgGlobalAlpha;
 import static org.lwjgl.nanovg.NanoVG.nvgImagePattern;
 import static org.lwjgl.nanovg.NanoVG.nvgIntersectScissor;
-import static org.lwjgl.nanovg.NanoVG.nvgResetScissor;
 import static org.lwjgl.nanovg.NanoVG.nvgRect;
+import static org.lwjgl.nanovg.NanoVG.nvgResetScissor;
 import static org.lwjgl.nanovg.NanoVG.nvgRoundedRect;
 import static org.lwjgl.nanovg.NanoVG.nvgStroke;
 import static org.lwjgl.nanovg.NanoVG.nvgStrokeColor;
@@ -27,6 +27,7 @@ import static org.lwjgl.nanovg.NanoVG.nvgStrokeWidth;
 import static org.lwjgl.nanovg.NanoVG.nvgText;
 import static org.lwjgl.nanovg.NanoVG.nvgTextAlign;
 import static org.lwjgl.nanovg.NanoVG.nvgTextBox;
+import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL3.NVG_ANTIALIAS;
 import static org.lwjgl.nanovg.NanoVGGL3.NVG_STENCIL_STROKES;
 import static org.lwjgl.nanovg.NanoVGGL3.nvgCreateGL3;
@@ -54,6 +55,8 @@ import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.VectorButton;
+import com.bwyap.engine.gui.element.base.VectorCheckBox;
+import com.bwyap.engine.gui.element.base.VectorCheckBox.CheckBoxCheckStyle;
 import com.bwyap.engine.gui.element.base.VectorScrollArea;
 import com.bwyap.engine.gui.element.base.VectorTextBox;
 import com.bwyap.engine.gui.element.base.VectorTextField;
@@ -79,11 +82,12 @@ import com.bwyap.enginedriver.resource.Resource;
  */
 public class NVGRenderer extends GUIRenderer {
 
-	
 	protected final long vgID;
 	protected final Set<String> loadedFonts;
 	
 	private static NVGColor colour = NVGColor.create();
+	
+	private boolean resetAlpha = true;
 	
 	
 	public NVGRenderer() throws Exception {
@@ -171,11 +175,15 @@ public class NVGRenderer extends GUIRenderer {
 			// Render element
 			if (e instanceof Button) renderButton((Button)e);
 			else if (e instanceof VectorScrollArea) renderScrollArea((VectorScrollArea)e, window);
-			else if (e instanceof Panel) renderPanel((Panel)e, window, panel.getPosition());
+			else if (e instanceof VectorCheckBox) renderVectorCheckBox((VectorCheckBox)e);
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
-			
+			else if (e instanceof Panel) {
+				if (e instanceof PanelWindow) resetAlpha = false;
+				renderPanel((Panel)e, window, panel.getPosition());
+				resetAlpha = true;
+			}
 		}
 		
 		// Render any text it may have
@@ -184,7 +192,7 @@ public class NVGRenderer extends GUIRenderer {
 		}
 		
 		popScissor(getContext());
-		nvgGlobalAlpha(getContext(), 1.0f);
+		if (resetAlpha) nvgGlobalAlpha(getContext(), 1.0f);
 	}
 	
 	
@@ -226,6 +234,54 @@ public class NVGRenderer extends GUIRenderer {
 		
 		// Render any text it may have
 		renderText(button.getTextComponent(), button);
+	}
+	
+	
+	@Override
+	public void renderVectorCheckBox(VectorCheckBox checkbox) {
+		// Render the check box
+		renderColouredVectorShape(checkbox, checkbox);
+				
+		if (!checkbox.isSelected() || checkbox.getCheckStyle() == CheckBoxCheckStyle.NONE) return;
+		
+		float ox = checkbox.getPositionX();
+		float oy = checkbox.getPositionY();
+		float w = checkbox.getWidth();
+		float h = checkbox.getHeight();
+		float padding = checkbox.getCheckPadding();
+
+		// Render the check mark
+		switch (checkbox.getCheckStyle()) {
+		case CROSS:
+			nvgBeginPath(getContext());
+			nvgMoveTo(getContext(), ox + padding, oy + padding);
+			nvgLineTo(getContext(), ox + w - padding, oy + h - padding);
+			nvgMoveTo(getContext(), ox + w - padding, oy + padding);
+			nvgLineTo(getContext(), ox + padding, oy + h - padding);
+			nvgStrokeWidth(getContext(), checkbox.getCheckStrokeWidth());
+			nvgStrokeColor(getContext(), rgba(checkbox.getCheckColour())); 
+			nvgStroke(getContext());
+			break;
+		case DOT:
+			nvgBeginPath(getContext());
+			nvgCircle(getContext(), ox + w/2, oy + h/2, w/2 - 4);
+			nvgFillColor(getContext(), rgba(checkbox.getCheckColour())); 
+			nvgFill(getContext());
+			break;
+		case TICK:
+			nvgBeginPath(getContext());
+			nvgMoveTo(getContext(), ox + padding, oy + h/2);
+			nvgLineTo(getContext(), ox + padding + w/4, oy + h - padding);
+			nvgLineTo(getContext(), ox + w - padding, oy + padding);
+			nvgStrokeWidth(getContext(), checkbox.getCheckStrokeWidth());
+			nvgStrokeColor(getContext(), rgba(checkbox.getCheckColour())); 
+			nvgStroke(getContext());
+			break;
+			
+		// This should never be called
+		case NONE: break;
+		}
+		
 	}
 	
 
@@ -419,7 +475,7 @@ public class NVGRenderer extends GUIRenderer {
 		}
 	}
 	
-	private static ArrayList<ScissorBounds> scissorBoundsStack = new ArrayList<ScissorBounds>();
+	private ArrayList<ScissorBounds> scissorBoundsStack = new ArrayList<ScissorBounds>();
 	
 	
 	/**
@@ -430,7 +486,7 @@ public class NVGRenderer extends GUIRenderer {
 	 * @param w
 	 * @param h
 	 */
-	private static void pushScissor(long ctx, float x, float y, float w, float h) {
+	private void pushScissor(long ctx, float x, float y, float w, float h) {
 		scissorBoundsStack.add(new ScissorBounds(x, y, w, h));
 		nvgIntersectScissor(ctx, x, y, w, h);
 	}
@@ -440,7 +496,7 @@ public class NVGRenderer extends GUIRenderer {
 	 * Undo the last applied scissor
 	 * @param ctx
 	 */
-	private static void popScissor(long ctx) {
+	private void popScissor(long ctx) {
 		if (scissorBoundsStack.size() <= 1) {
 			if (scissorBoundsStack.size() == 1) scissorBoundsStack.clear();
 			nvgResetScissor(ctx);

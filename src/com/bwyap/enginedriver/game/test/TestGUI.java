@@ -2,7 +2,9 @@ package com.bwyap.enginedriver.game.test;
 
 import com.bwyap.engine.gui.element.EllipticalButton;
 import com.bwyap.engine.gui.element.RectangularButton;
+import com.bwyap.engine.gui.element.RectangularCheckBox;
 import com.bwyap.engine.gui.element.RoundedRectangularButton;
+import com.bwyap.engine.gui.element.RoundedRectangularCheckBox;
 import com.bwyap.engine.gui.element.RoundedRectangularPanel;
 import com.bwyap.engine.gui.element.RoundedRectangularPanelWindow;
 import com.bwyap.engine.gui.element.RoundedRectangularScrollArea;
@@ -12,6 +14,7 @@ import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.ETextAlignment;
 import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.ScrollArea.ScrollDirection;
+import com.bwyap.engine.gui.element.base.VectorCheckBox.CheckBoxCheckStyle;
 import com.bwyap.enginedriver.resource.Resource;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGGUI;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGRenderer;
@@ -145,6 +148,9 @@ public class TestGUI extends NVGGUI {
 		scroll.addElement(textbox);
 		//addElement(scroll);
 		
+		
+		RectangularCheckBox box1 = new RectangularCheckBox(5, 30, 15, CheckBoxCheckStyle.TICK);
+		RoundedRectangularCheckBox box2 = new RoundedRectangularCheckBox(5, 30, 15, 5, CheckBoxCheckStyle.CROSS);
 
 		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 350, 250, 5) {
 			@Override
@@ -153,9 +159,12 @@ public class TestGUI extends NVGGUI {
 		window.setVisible(true);
 		window.setSelectable(false);
 		window.addElement(scroll);
+		window.addElement(box1);
+		window.addElement(box2);
 		window.setReactToMouseOver(false);
 		window.setResizable(true);
 		addElement(window);
+		
 	}
 	
 
