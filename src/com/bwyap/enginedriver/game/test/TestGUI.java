@@ -163,7 +163,7 @@ public class TestGUI extends NVGGUI {
 		window.addElement(box2);
 		window.setReactToMouseOver(false);
 		window.setResizable(true);
-		addElement(window);
+		addElement(1, window);
 		
 	}
 	

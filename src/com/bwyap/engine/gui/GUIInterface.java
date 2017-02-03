@@ -1,7 +1,5 @@
 package com.bwyap.engine.gui;
 
-import java.util.List;
-
 import com.bwyap.engine.gui.interfaces.GUIElementInterface;
 import com.bwyap.engine.input.InputHandler;
 
@@ -44,10 +42,4 @@ public interface GUIInterface {
 	 */
 	public boolean removeElement(GUIElementInterface e);
 	
-	
-	/**
-	 * Gets all GUI elements in this GUI.
-	 * @return
-	 */
-	public List<GUIElementInterface> getElements();
 }

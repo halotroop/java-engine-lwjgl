@@ -1,5 +1,7 @@
 package com.bwyap.engine.gui.element.base;
 
+import java.util.Iterator;
+
 import org.joml.Vector2f;
 
 import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
@@ -200,7 +202,9 @@ public abstract class ScrollArea extends Panel {
 		scrollBar.updateBounds(this, parent);
 		
 		// Set position of GUI elements
-		for (GUIElementInterface e : elements) {
+		Iterator<GUIElementInterface> it = iterator();
+		while (it.hasNext()) {
+			GUIElementInterface e = it.next();
 			if (scrollDirection == ScrollDirection.VERTICAL) 
 				e.setPosition(e.getAbsolutePosition().x, e.getAbsolutePosition().y + scrollDelta * SCROLL_SPEED);
 			else if (scrollDirection == ScrollDirection.HORIZONTAL) 

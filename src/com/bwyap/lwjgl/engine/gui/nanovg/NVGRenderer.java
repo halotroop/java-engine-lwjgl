@@ -8,6 +8,7 @@ import static org.lwjgl.nanovg.NanoVG.NVG_ALIGN_RIGHT;
 import static org.lwjgl.nanovg.NanoVG.NVG_ALIGN_TOP;
 import static org.lwjgl.nanovg.NanoVG.nvgBeginFrame;
 import static org.lwjgl.nanovg.NanoVG.nvgBeginPath;
+import static org.lwjgl.nanovg.NanoVG.nvgCircle;
 import static org.lwjgl.nanovg.NanoVG.nvgEllipse;
 import static org.lwjgl.nanovg.NanoVG.nvgEndFrame;
 import static org.lwjgl.nanovg.NanoVG.nvgFill;
@@ -18,6 +19,8 @@ import static org.lwjgl.nanovg.NanoVG.nvgFontSize;
 import static org.lwjgl.nanovg.NanoVG.nvgGlobalAlpha;
 import static org.lwjgl.nanovg.NanoVG.nvgImagePattern;
 import static org.lwjgl.nanovg.NanoVG.nvgIntersectScissor;
+import static org.lwjgl.nanovg.NanoVG.nvgLineTo;
+import static org.lwjgl.nanovg.NanoVG.nvgMoveTo;
 import static org.lwjgl.nanovg.NanoVG.nvgRect;
 import static org.lwjgl.nanovg.NanoVG.nvgResetScissor;
 import static org.lwjgl.nanovg.NanoVG.nvgRoundedRect;
@@ -27,7 +30,6 @@ import static org.lwjgl.nanovg.NanoVG.nvgStrokeWidth;
 import static org.lwjgl.nanovg.NanoVG.nvgText;
 import static org.lwjgl.nanovg.NanoVG.nvgTextAlign;
 import static org.lwjgl.nanovg.NanoVG.nvgTextBox;
-import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.nanovg.NanoVGGL3.NVG_ANTIALIAS;
 import static org.lwjgl.nanovg.NanoVGGL3.NVG_STENCIL_STROKES;
 import static org.lwjgl.nanovg.NanoVGGL3.nvgCreateGL3;
@@ -41,6 +43,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.joml.Vector2f;
@@ -168,7 +171,10 @@ public class NVGRenderer extends GUIRenderer {
 					panel.getBounds().y - panel.getPaddingBottom());
 		}
 		
-		for (GUIElementInterface e : panel.getElements()) {
+		Iterator<GUIElementInterface> it = panel.iterator();
+		while (it.hasNext()) {
+			GUIElementInterface e = it.next();
+			
 			// Update the element's bounds
 			e.updateBounds(panel, panel.getPosition());
 			
@@ -185,7 +191,7 @@ public class NVGRenderer extends GUIRenderer {
 				resetAlpha = true;
 			}
 		}
-		
+				
 		// Render any text it may have
 		if (panel instanceof ITextDisplay) {
 			renderText(((ITextDisplay)panel).getTextComponent(), panel);
