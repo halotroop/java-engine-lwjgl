@@ -10,7 +10,7 @@ import com.bwyap.engine.input.InputMapping;
 import com.bwyap.enginedriver.resource.Resource;
 
 /**
- * A GUI element that can be clicked button specified mouse buttons.
+ * A GUI element that can be clicked by specified mouse buttons.
  * Valid mouse buttons are in the list {@code acceptedButtons}.
  * 
  * @author bwyap
