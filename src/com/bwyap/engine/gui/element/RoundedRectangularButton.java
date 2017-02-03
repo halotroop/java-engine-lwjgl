@@ -1,10 +1,12 @@
 package com.bwyap.engine.gui.element;
 
+import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.VectorButton;
 import com.bwyap.engine.gui.interfaces.IVectorRoundedRect;
 
 /**
  * A rounded rectangular button that is drawn by the graphics rendering system.
+ * See {@link Button}.
  * @author bwyap
  *
  */

@@ -1,11 +1,13 @@
 package com.bwyap.engine.gui.element;
 
 import com.bwyap.engine.gui.element.base.VectorTextBox;
+import com.bwyap.engine.gui.element.base.TextBox;
 import com.bwyap.engine.gui.interfaces.IVectorRect;
 
 
 /**
  * A rectangular text box.
+ * See {@link TextBox}.
  * @author bwyap
  *
  */

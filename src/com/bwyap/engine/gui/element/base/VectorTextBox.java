@@ -6,7 +6,7 @@ import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 
 /**
  * A text box with a vector drawn background.
- * {@link TextBox}
+ * See {@link TextBox}.
  * @author bwyap
  *
  */

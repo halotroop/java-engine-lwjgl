@@ -3,6 +3,12 @@ package com.bwyap.engine.gui.element.base;
 import com.bwyap.engine.gui.element.properties.VectorShapeColourProperties;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 
+/**
+ * A scroll area with a vector drawn background.
+ * See {@link ScrollArea}.
+ * @author bwyap
+ *
+ */
 public abstract class VectorScrollArea extends ScrollArea implements IColouredVectorShape {
 	
 	protected final VectorShapeColourProperties colours;	

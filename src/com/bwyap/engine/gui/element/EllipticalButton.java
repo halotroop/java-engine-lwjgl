@@ -5,6 +5,7 @@ import com.bwyap.engine.gui.interfaces.IVectorEllipse;
 
 /**
  * An elliptical button that is drawn by the graphics rendering system.
+ * See {@link Button}.
  * @author bwyap
  *
  */

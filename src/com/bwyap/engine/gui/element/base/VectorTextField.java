@@ -6,6 +6,12 @@ import com.bwyap.engine.gui.element.properties.VectorShapeColourProperties;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 import com.bwyap.engine.window.BoundsInterface;
 
+/**
+ * A text field with a vector drawn background.
+ * See {@link TextField}.
+ * @author bwyap
+ *
+ */
 public abstract class VectorTextField extends TextField implements IColouredVectorShape {
 
 	protected final VectorShapeColourProperties colours;		

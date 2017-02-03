@@ -1,10 +1,12 @@
 package com.bwyap.engine.gui.element;
 
+import com.bwyap.engine.gui.element.base.TextField;
 import com.bwyap.engine.gui.element.base.VectorTextField;
 import com.bwyap.engine.gui.interfaces.IVectorRect;
 
 /**
  * A vector drawn rectangular text field.
+ * See {@link TextField}.
  * @author bwyap
  *
  */

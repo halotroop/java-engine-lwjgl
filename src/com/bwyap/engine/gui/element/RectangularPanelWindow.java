@@ -5,6 +5,7 @@ import com.bwyap.engine.gui.interfaces.IVectorRect;
 
 /**
  * A rectangular panel window.
+ * See {@link PanelWindow}.
  * @author bwyap
  *
  */

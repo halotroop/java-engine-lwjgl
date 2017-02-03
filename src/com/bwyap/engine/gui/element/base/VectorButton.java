@@ -6,6 +6,7 @@ import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 /**
  * A button that is rendered using the graphics rendering system.
  * It can be one of the shapes as enumerated by {@code ButtonShape}.
+ * See {@link Button}.
  * @author bwyap
  *
  */

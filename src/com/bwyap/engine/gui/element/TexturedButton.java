@@ -4,6 +4,7 @@ import com.bwyap.engine.gui.element.base.Button;
 
 /**
  * A button that is rendered with a texture.
+ * See {@link Button}.
  * @author bwyap
  *
  */
