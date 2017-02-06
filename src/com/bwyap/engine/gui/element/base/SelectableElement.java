@@ -71,6 +71,8 @@ public abstract class SelectableElement extends ClickableElement implements ISel
 
 	/**
 	 * {@inheritDoc}
+	 * Handles the deselection of the element when the mouse is clicked
+	 * outside the bounds of the element.
 	 * <p>Override this method for custom input handling functionality.</p>
 	 */
 	@Override
