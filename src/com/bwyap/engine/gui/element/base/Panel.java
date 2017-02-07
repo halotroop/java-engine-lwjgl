@@ -171,7 +171,7 @@ public abstract class Panel extends SelectableElement implements IColouredVector
 		
 		Iterator<GUIElementInterface> it = iterator();
 		while (it.hasNext()) {
-			it.next().handleInput(input, bounds);
+			it.next().handleInput(input, this);
 		}
 	}
 	
