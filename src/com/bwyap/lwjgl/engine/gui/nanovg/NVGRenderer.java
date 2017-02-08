@@ -186,13 +186,13 @@ public class NVGRenderer extends GUIRenderer {
 			
 			// Render element
 			if (e instanceof Button) renderButton((Button)e);
-			else if (e instanceof VectorScrollArea) renderScrollArea((VectorScrollArea)e, window);
+			else if (e instanceof VectorScrollArea) renderVectorScrollArea((VectorScrollArea)e, window);
 			else if (e instanceof VectorCheckBox) renderVectorCheckBox((VectorCheckBox)e);
 			else if (e instanceof VectorRadioButton) renderVectorRadioButton((VectorRadioButton)e);
 			else if (e instanceof RadioButtonGroup) renderRadioButtonGroup((RadioButtonGroup)e, panel);
 			else if (e instanceof VectorProgressBar) renderVectorProgressBar((VectorProgressBar)e);
 			else if (e instanceof Label) renderLabel((Label)e);
-			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
+			else if (e instanceof VectorTextBox) renderVectorTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
 			else if (e instanceof Panel) {
 				if (e instanceof PanelWindow) resetAlpha = false;
@@ -219,7 +219,7 @@ public class NVGRenderer extends GUIRenderer {
 
 	
 	@Override
-	public void renderTextBox(VectorTextBox textBox) {
+	public void renderVectorTextBox(VectorTextBox textBox) {
 		renderColouredVectorShape(textBox, textBox);
 		renderText(textBox.getTextComponent(), textBox);
 	}
@@ -232,7 +232,7 @@ public class NVGRenderer extends GUIRenderer {
 	
 	
 	@Override
-	public void renderScrollArea(VectorScrollArea scrollArea, WindowInterface window) {
+	public void renderVectorScrollArea(VectorScrollArea scrollArea, WindowInterface window) {
 		// Render the panel contents
 		renderPanel(scrollArea, window, scrollArea.getPosition());	
 		

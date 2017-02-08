@@ -54,7 +54,7 @@ public interface GUIRendererInterface {
 	 * @param scrollArea
 	 * @param window
 	 */
-	public void renderScrollArea(VectorScrollArea scrollArea, WindowInterface window);
+	public void renderVectorScrollArea(VectorScrollArea scrollArea, WindowInterface window);
 	
 	
 	/**
