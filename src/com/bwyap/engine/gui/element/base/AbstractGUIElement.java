@@ -2,19 +2,39 @@ package com.bwyap.engine.gui.element.base;
 
 import org.joml.Vector2f;
 
-import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.GUIElementInterface;
-import com.bwyap.engine.input.InputHandler;
 import com.bwyap.engine.window.BoundsInterface;
 
 
 /**
  * A dummy class that can be extended by GUI elements 
- * that should not be rendered themselves.
+ * that should not be rendered themselves, but need to
+ * be to be processed by the renderer.
  * @author bwyap
  *
  */
-public class AbstractGUIElement implements GUIElementInterface {
+public abstract class AbstractGUIElement implements GUIElementInterface {
+
+	protected boolean enabled;
+	
+	
+	@Override
+	public final void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	
+	@Override
+	public final boolean isEnabled() {
+		return enabled;
+	}
+	
+	
+	/* 
+	 * ==============
+	 * UNUSED METHODS
+	 * ============== 
+	 */
 	
 	/**
 	 * Unused method in this class.
@@ -98,18 +118,6 @@ public class AbstractGUIElement implements GUIElementInterface {
 	 * Unused method in this class.
 	 */
 	@Override
-	public void update(float timestep) {}
-
-	/**
-	 * Unused method in this class.
-	 */
-	@Override
-	public void handleInput(InputHandler input, GUIBoundsInterface bounds) {}
-
-	/**
-	 * Unused method in this class.
-	 */
-	@Override
 	public void updateBounds(BoundsInterface window, Vector2f parent) {}
 
 	/**
@@ -152,18 +160,6 @@ public class AbstractGUIElement implements GUIElementInterface {
 	 * Unused method in this class.
 	 */
 	@Override
-	public void setEnabled(boolean enabled) {}
-	
-	/**
-	 * Unused method in this class.
-	 */
-	@Override
-	public boolean isEnabled() {return false;}
-
-	/**
-	 * Unused method in this class.
-	 */
-	@Override
 	public void setPositionAbsolute(boolean absolute) {}
 
 	/**
@@ -183,5 +179,4 @@ public class AbstractGUIElement implements GUIElementInterface {
 	 */
 	@Override
 	public boolean isScaleAbsolute() {return false;}
-	
 }

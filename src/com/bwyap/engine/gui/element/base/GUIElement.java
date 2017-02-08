@@ -17,10 +17,9 @@ import com.bwyap.engine.window.BoundsInterface;
  * @author bwyap
  *
  */
-public abstract class GUIElement implements GUIElementInterface {
+public abstract class GUIElement extends AbstractGUIElement implements GUIElementInterface {
 	
 	protected final Vector2f absolutePosition, position;
-	protected boolean enabled;
 	protected boolean positionAbsolute;
 	protected boolean scaleAbsolute;
 	
@@ -220,18 +219,6 @@ public abstract class GUIElement implements GUIElementInterface {
 			return true;
 		}
 		return false;
-	}
-	
-	
-	@Override
-	public final void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	
-	@Override
-	public final boolean isEnabled() {
-		return enabled;
 	}
 	
 	
