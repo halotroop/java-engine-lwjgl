@@ -41,6 +41,17 @@ public class JSONWrapper {
 	
 	
 	/**
+	 * A helper function for extracting a String value from a JSON object
+	 * @param o
+	 * @param key
+	 * @return
+	 */
+	protected static String getString (JSONObject o, String key) {
+		return o.get(key).toString();
+	}
+	
+	
+	/**
 	 * Validates the contents of the loaded JSON object.
 	 * <p>
 	 * This method should be overridden so that the loaded object can be checked for validity.
