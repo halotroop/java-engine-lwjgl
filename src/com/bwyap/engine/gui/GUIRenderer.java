@@ -28,6 +28,7 @@ import com.bwyap.engine.window.WindowInterface;
  * 	<li>Text box</li>
  * 	<li>Scroll area</li>
  * 	<li>Check boxes</li>
+ * 	<li>Radio buttons</li>
  * </ul>
  * 
  * TODO:
@@ -35,7 +36,6 @@ import com.bwyap.engine.window.WindowInterface;
  * 	<li>Drop down list</li>
  * 	<li>List/table</li>
  * 	<li>Tabbed panels</li>
- * 	<li>Radio buttons</li>
  * 	<li>Progress bar</li>
  * 	<li>Image</li>
  * </ul>

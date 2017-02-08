@@ -60,10 +60,11 @@ import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.properties.TextComponent;
 import com.bwyap.engine.gui.element.vector.VectorButton;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox;
+import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
+import com.bwyap.engine.gui.element.vector.VectorRadioButton;
 import com.bwyap.engine.gui.element.vector.VectorScrollArea;
 import com.bwyap.engine.gui.element.vector.VectorTextBox;
 import com.bwyap.engine.gui.element.vector.VectorTextField;
-import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
 import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.GUIElementInterface;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
@@ -182,6 +183,7 @@ public class NVGRenderer extends GUIRenderer {
 			if (e instanceof Button) renderButton((Button)e);
 			else if (e instanceof VectorScrollArea) renderScrollArea((VectorScrollArea)e, window);
 			else if (e instanceof VectorCheckBox) renderVectorCheckBox((VectorCheckBox)e);
+			else if (e instanceof VectorRadioButton) renderVectorRadioButton((VectorRadioButton)e);
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
@@ -287,7 +289,28 @@ public class NVGRenderer extends GUIRenderer {
 		// This should never be called
 		case NONE: break;
 		}
+	}
+	
+	
+	//
+	//
+	//
+	//
+	public void renderVectorRadioButton(VectorRadioButton radio) {
+		// Render the check box
+		renderColouredVectorShape(radio, radio);
+
+		if (!radio.isSelected()) return;
 		
+		float ox = radio.getPositionX();
+		float oy = radio.getPositionY();
+		float r = radio.getWidth();
+		float padding = radio.getCheckPadding();
+
+		nvgBeginPath(getContext());
+		nvgCircle(getContext(), ox + r, oy + r, r - padding);
+		nvgFillColor(getContext(), rgba(radio.getCheckColour())); 
+		nvgFill(getContext());
 	}
 	
 

@@ -1,5 +1,8 @@
 package com.bwyap.enginedriver.game.test;
 
+import org.joml.Vector4f;
+
+import com.bwyap.engine.gui.element.CircularRadioButton;
 import com.bwyap.engine.gui.element.EllipticalButton;
 import com.bwyap.engine.gui.element.RectangularButton;
 import com.bwyap.engine.gui.element.RectangularCheckBox;
@@ -150,7 +153,12 @@ public class TestGUI extends NVGGUI {
 		
 		
 		RectangularCheckBox box1 = new RectangularCheckBox(5, 30, 15, CheckBoxCheckStyle.TICK);
-		RoundedRectangularCheckBox box2 = new RoundedRectangularCheckBox(5, 30, 15, 5, CheckBoxCheckStyle.CROSS);
+		RoundedRectangularCheckBox box2 = new RoundedRectangularCheckBox(5, 50, 15, 5, CheckBoxCheckStyle.CROSS);
+		box1.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
+		box2.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
+		
+		CircularRadioButton radio1 = new CircularRadioButton(5, 70, 7.5f);
+		radio1.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
 
 		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 350, 250, 5) {
 			@Override
@@ -161,6 +169,7 @@ public class TestGUI extends NVGGUI {
 		window.addElement(scroll);
 		window.addElement(box1);
 		window.addElement(box2);
+		window.addElement(radio1);
 		window.setReactToMouseOver(false);
 		window.setResizable(true);
 		addElement(1, window);
