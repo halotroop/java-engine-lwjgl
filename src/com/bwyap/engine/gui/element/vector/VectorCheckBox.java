@@ -8,7 +8,7 @@ import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 
 
 /**
- * A check box with a vector drawn background.
+ * A vector drawn check box.
  * See {@link CheckBox}.
  * @author bwyap
  *
