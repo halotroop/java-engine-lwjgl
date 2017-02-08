@@ -56,6 +56,29 @@ public class ResourceLoader {
 	
 	
 	/**
+	 * Loads a JSON object from an internal file.
+	 * @param path the internal path of the JSON file
+	 * @return
+	 */
+	public static JSONObject loadInternalJSON(String path) {
+		JSONObject jsonObject = null;
+		
+		JSONParser parser = new JSONParser();
+		try {
+			String config = loadInternalTextFileAsString(path);
+			Object o = parser.parse(config);
+			jsonObject = (JSONObject) o;
+		}
+		catch (ParseException e) {
+			log("An error occurred while trying to parse internal JSON file <" + path + ">.");
+			printStackTrace(e);
+		}
+		
+		return jsonObject;
+	}
+	
+	
+	/**
 	 * Reads an internal CSV file from within the jar and loads the data into a hash map.
 	 * @param path
 	 * @return
