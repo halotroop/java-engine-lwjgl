@@ -4,6 +4,7 @@ import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.properties.TextComponent;
 import com.bwyap.engine.gui.element.vector.VectorButton;
+import com.bwyap.engine.gui.element.vector.VectorRadioButton;
 import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 import com.bwyap.engine.window.WindowInterface;
@@ -99,7 +100,7 @@ public abstract class GUIRenderer implements GUIRendererInterface {
 	
 	
 	/**
-	 * Render a drawn vector button
+	 * Render a vector drawn button
 	 * @param button
 	 */
 	protected abstract void renderVectorButton(VectorButton button);
@@ -110,6 +111,13 @@ public abstract class GUIRenderer implements GUIRendererInterface {
 	 * @param button
 	 */
 	protected abstract void renderTexturedButton(TexturedButton button);
+	
+	
+	/**
+	 * Render a vector drawn radio button
+	 * @param radio
+	 */
+	protected abstract void renderVectorRadioButton(VectorRadioButton radio);
 	
 	
 	/**

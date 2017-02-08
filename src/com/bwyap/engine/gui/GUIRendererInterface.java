@@ -5,6 +5,7 @@ import org.joml.Vector2f;
 import com.bwyap.engine.gui.element.Label;
 import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
+import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox;
 import com.bwyap.engine.gui.element.vector.VectorScrollArea;
 import com.bwyap.engine.gui.element.vector.VectorTextBox;
@@ -87,7 +88,14 @@ public interface GUIRendererInterface {
 	 * Render a check box
 	 * @param checkbox
 	 */
-	void renderVectorCheckBox(VectorCheckBox checkbox);
-
+	public void renderVectorCheckBox(VectorCheckBox checkbox);
+	
+	
+	/**
+	 * Render a radio button group 
+	 * @param group
+	 * @param parentPanel
+	 */
+	public void renderRadioButtonGroup(RadioButtonGroup group, Panel parentPanel);
 	
 }

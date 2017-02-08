@@ -16,6 +16,7 @@ import com.bwyap.engine.gui.element.RoundedRectangularTextfield;
 import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.ETextAlignment;
 import com.bwyap.engine.gui.element.base.PanelWindow;
+import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.base.ScrollArea.ScrollDirection;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
 import com.bwyap.enginedriver.resource.Resource;
@@ -157,9 +158,20 @@ public class TestGUI extends NVGGUI {
 		box1.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
 		box2.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
 		
-		CircularRadioButton radio1 = new CircularRadioButton(5, 70, 7.5f);
+		RadioButtonGroup group1 = new RadioButtonGroup();
+		CircularRadioButton radio1 = new CircularRadioButton("test", 5, 70, 7.5f);
 		radio1.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
-
+		
+		CircularRadioButton radio2 = new CircularRadioButton("test2", 5, 90, 7.5f);
+		radio2.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
+		
+		CircularRadioButton radio3 = new CircularRadioButton("test3", 5, 110, 7.5f);
+		radio3.colourProperties().setColour(new Vector4f(0.3f, 0.3f, 0.3f, 1.0f));
+		
+		group1.add(radio1);
+		group1.add(radio2);
+		group1.add(radio3);
+		
 		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 350, 250, 5) {
 			@Override
 			protected void initElements() { }
@@ -169,7 +181,7 @@ public class TestGUI extends NVGGUI {
 		window.addElement(scroll);
 		window.addElement(box1);
 		window.addElement(box2);
-		window.addElement(radio1);
+		window.addElement(group1);
 		window.setReactToMouseOver(false);
 		window.setResizable(true);
 		addElement(1, window);

@@ -44,6 +44,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.joml.Vector2f;
@@ -57,6 +58,8 @@ import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.base.PanelWindow;
+import com.bwyap.engine.gui.element.base.RadioButton;
+import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.properties.TextComponent;
 import com.bwyap.engine.gui.element.vector.VectorButton;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox;
@@ -184,6 +187,7 @@ public class NVGRenderer extends GUIRenderer {
 			else if (e instanceof VectorScrollArea) renderScrollArea((VectorScrollArea)e, window);
 			else if (e instanceof VectorCheckBox) renderVectorCheckBox((VectorCheckBox)e);
 			else if (e instanceof VectorRadioButton) renderVectorRadioButton((VectorRadioButton)e);
+			else if (e instanceof RadioButtonGroup) renderRadioButtonGroup((RadioButtonGroup)e, panel);
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
@@ -292,16 +296,28 @@ public class NVGRenderer extends GUIRenderer {
 	}
 	
 	
-	//
-	//
-	//
-	//
-	public void renderVectorRadioButton(VectorRadioButton radio) {
-		// Render the check box
+	@Override
+	public void renderRadioButtonGroup(RadioButtonGroup group, Panel parentPanel) {
+		Map<String, RadioButton> buttons = group.getButtonMap();
+		
+		// Render each radio button
+		for (String name : buttons.keySet()) {
+			RadioButton b = buttons.get(name);
+			if (b instanceof VectorRadioButton) {
+				b.updateBounds(parentPanel, parentPanel.getPosition());
+				renderVectorRadioButton((VectorRadioButton) b);
+			}
+		}
+	}
+	
+	
+	@Override
+	protected void renderVectorRadioButton(VectorRadioButton radio) {
+		// Render the radio button
 		renderColouredVectorShape(radio, radio);
 
 		if (!radio.isSelected()) return;
-		
+
 		float ox = radio.getPositionX();
 		float oy = radio.getPositionY();
 		float r = radio.getWidth();

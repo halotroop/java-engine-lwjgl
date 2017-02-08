@@ -16,16 +16,41 @@ import com.bwyap.engine.input.InputHandler;
 public abstract class RadioButton extends SelectableElement {
 	
 	private String name;
+	private RadioButtonGroup buttonGroup;
 	
 	
+	/**
+	 * Create a radio button with the specified name.
+	 * @param name
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public RadioButton(String name, float x, float y, float width, float height) {
 		super(x, y, width, height);
 		this.name = name;		
 	}
 	
-
+	
+	/**
+	 * Create a radio button with a default name of "unamed".
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 */
 	public RadioButton(float x, float y, float width, float height) {
-		this("null", x, y, width, height);
+		this("unamed", x, y, width, height);
+	}
+	
+	
+	/**
+	 * Set the button group this radio button is attached to.
+	 * @param buttonGroup
+	 */
+	protected void setButtonGroup(RadioButtonGroup buttonGroup) {
+		this.buttonGroup = buttonGroup;
 	}
 	
 	
@@ -59,9 +84,12 @@ public abstract class RadioButton extends SelectableElement {
 	 * {@inheritDoc}
 	 * <p>
 	 * Override this method to implement custom functionality.
+	 * Ensure you also call {@code super.onSelected()} if overriding.
 	 * </p>
 	 */
- 	public void onSelect() { }
+ 	public void onSelect() { 
+ 		if (buttonGroup != null) buttonGroup.selectNew(this.getName());
+ 	}
 
 	
  	/**
