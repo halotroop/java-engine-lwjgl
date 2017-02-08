@@ -1,6 +1,6 @@
 package com.bwyap.engine.gui.interfaces;
 
-import com.bwyap.engine.gui.element.base.EVectorShape;
+import com.bwyap.engine.gui.element.vector.EVectorShape;
 
 public interface IVectorShape {
 	

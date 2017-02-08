@@ -1,7 +1,7 @@
 package com.bwyap.engine.gui.element;
 
 import com.bwyap.engine.gui.element.base.ScrollArea;
-import com.bwyap.engine.gui.element.base.VectorScrollArea;
+import com.bwyap.engine.gui.element.vector.VectorScrollArea;
 import com.bwyap.engine.gui.interfaces.IVectorRect;
 
 

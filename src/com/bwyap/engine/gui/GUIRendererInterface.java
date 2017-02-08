@@ -5,10 +5,10 @@ import org.joml.Vector2f;
 import com.bwyap.engine.gui.element.Label;
 import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
-import com.bwyap.engine.gui.element.base.VectorCheckBox;
-import com.bwyap.engine.gui.element.base.VectorScrollArea;
-import com.bwyap.engine.gui.element.base.VectorTextBox;
-import com.bwyap.engine.gui.element.base.VectorTextField;
+import com.bwyap.engine.gui.element.vector.VectorCheckBox;
+import com.bwyap.engine.gui.element.vector.VectorScrollArea;
+import com.bwyap.engine.gui.element.vector.VectorTextBox;
+import com.bwyap.engine.gui.element.vector.VectorTextField;
 import com.bwyap.engine.window.WindowInterface;
 
 

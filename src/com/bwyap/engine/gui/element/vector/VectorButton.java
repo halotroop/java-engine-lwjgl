@@ -1,5 +1,6 @@
-package com.bwyap.engine.gui.element.base;
+package com.bwyap.engine.gui.element.vector;
 
+import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.properties.VectorShapeColourProperties;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 

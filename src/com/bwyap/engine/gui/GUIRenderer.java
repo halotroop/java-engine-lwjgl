@@ -2,8 +2,8 @@ package com.bwyap.engine.gui;
 
 import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.Panel;
-import com.bwyap.engine.gui.element.base.VectorButton;
 import com.bwyap.engine.gui.element.properties.TextComponent;
+import com.bwyap.engine.gui.element.vector.VectorButton;
 import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 import com.bwyap.engine.window.WindowInterface;

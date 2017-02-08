@@ -1,7 +1,7 @@
 package com.bwyap.engine.gui.element;
 
 import com.bwyap.engine.gui.element.base.CheckBox;
-import com.bwyap.engine.gui.element.base.VectorCheckBox;
+import com.bwyap.engine.gui.element.vector.VectorCheckBox;
 import com.bwyap.engine.gui.interfaces.IVectorRoundedRect;
 
 /**

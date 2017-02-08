@@ -1,7 +1,8 @@
-package com.bwyap.engine.gui.element.base;
+package com.bwyap.engine.gui.element.vector;
 
 import org.joml.Vector4f;
 
+import com.bwyap.engine.gui.element.base.CheckBox;
 import com.bwyap.engine.gui.element.properties.VectorShapeColourProperties;
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 

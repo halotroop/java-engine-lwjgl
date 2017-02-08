@@ -14,7 +14,7 @@ import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.ETextAlignment;
 import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.ScrollArea.ScrollDirection;
-import com.bwyap.engine.gui.element.base.VectorCheckBox.CheckBoxCheckStyle;
+import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
 import com.bwyap.enginedriver.resource.Resource;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGGUI;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGRenderer;

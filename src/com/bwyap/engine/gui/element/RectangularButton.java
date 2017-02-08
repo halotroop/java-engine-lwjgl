@@ -1,7 +1,7 @@
 package com.bwyap.engine.gui.element;
 
 import com.bwyap.engine.gui.element.base.Button;
-import com.bwyap.engine.gui.element.base.VectorButton;
+import com.bwyap.engine.gui.element.vector.VectorButton;
 import com.bwyap.engine.gui.interfaces.IVectorRect;
 
 /**
