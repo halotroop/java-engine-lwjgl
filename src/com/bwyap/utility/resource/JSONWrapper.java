@@ -46,7 +46,7 @@ public class JSONWrapper {
 	 * @param key
 	 * @return
 	 */
-	protected static String getString (JSONObject o, String key) {
+	protected static String getString(JSONObject o, String key) {
 		return o.get(key).toString();
 	}
 	
