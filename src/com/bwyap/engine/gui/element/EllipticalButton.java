@@ -27,10 +27,7 @@ public abstract class EllipticalButton extends VectorButton implements IVectorEl
 	 */
 	@Override
 	public void setBounds(float xOffset, float yOffset, float rx, float ry) {
-		absoluteBoundsOffset.x = xOffset;
-		absoluteBoundsOffset.y = yOffset;
-		absoluteBounds.x = rx;
-		absoluteBounds.y = ry;
+		super.setBounds(xOffset, yOffset, rx, ry);
 	}
 	
 	
@@ -43,7 +40,7 @@ public abstract class EllipticalButton extends VectorButton implements IVectorEl
 	 */
 	@Override
 	public void setBounds(float rx, float ry) {
-		setBounds(0, 0, rx, ry);
+		super.setBounds(0, 0, rx, ry);
 	}
 	
 
@@ -54,7 +51,7 @@ public abstract class EllipticalButton extends VectorButton implements IVectorEl
 	 * @param r radius for semi-major and semi-minor axes
 	 */
 	public void setBoundsRadius(float r) {
-		setBounds(0, 0, r, r);
+		super.setBounds(0, 0, r, r);
 	}
 	
 	
