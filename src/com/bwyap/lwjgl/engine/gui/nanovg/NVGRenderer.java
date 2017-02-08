@@ -61,9 +61,11 @@ import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.RadioButton;
 import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.properties.TextComponent;
+import com.bwyap.engine.gui.element.vector.SolidVectorProgressBar;
 import com.bwyap.engine.gui.element.vector.VectorButton;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
+import com.bwyap.engine.gui.element.vector.VectorProgressBar;
 import com.bwyap.engine.gui.element.vector.VectorRadioButton;
 import com.bwyap.engine.gui.element.vector.VectorScrollArea;
 import com.bwyap.engine.gui.element.vector.VectorTextBox;
@@ -188,6 +190,7 @@ public class NVGRenderer extends GUIRenderer {
 			else if (e instanceof VectorCheckBox) renderVectorCheckBox((VectorCheckBox)e);
 			else if (e instanceof VectorRadioButton) renderVectorRadioButton((VectorRadioButton)e);
 			else if (e instanceof RadioButtonGroup) renderRadioButtonGroup((RadioButtonGroup)e, panel);
+			else if (e instanceof VectorProgressBar) renderVectorProgressBar((VectorProgressBar)e);
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
@@ -246,6 +249,72 @@ public class NVGRenderer extends GUIRenderer {
 		
 		// Render any text it may have
 		renderText(button.getTextComponent(), button);
+	}
+	
+	
+	@Override
+	public void renderVectorProgressBar(VectorProgressBar progressBar) {
+		// Render the empty progress bar
+		renderColouredVectorShape(progressBar, progressBar);
+		
+		// Render the progress by setting a scissor
+		switch (progressBar.getFillStyle()) {
+		case DOWN:
+			pushScissor(getContext(), 
+					progressBar.getPositionX(), 
+					progressBar.getPositionY(), 
+					progressBar.getWidth(), 
+					progressBar.getHeight() * progressBar.getProgress());
+			break;
+		case LEFT:
+			pushScissor(getContext(), 
+					progressBar.getPositionX() + progressBar.getWidth() * (1 - progressBar.getProgress()), 
+					progressBar.getPositionY(), 
+					progressBar.getWidth() * progressBar.getProgress(), 
+					progressBar.getHeight());
+			break;
+		case RIGHT:
+			pushScissor(getContext(), 
+				progressBar.getPositionX(), 
+				progressBar.getPositionY(), 
+				progressBar.getWidth() * progressBar.getProgress(), 
+				progressBar.getHeight());
+			break;
+		case UP:
+			pushScissor(getContext(), 
+					progressBar.getPositionX(), 
+					progressBar.getPositionY() + progressBar.getHeight() * (1 - progressBar.getProgress()), 
+					progressBar.getWidth(), 
+					progressBar.getHeight());
+			break;
+		}
+		
+		// Render the progress
+		nvgBeginPath(getContext());
+		switch (progressBar.getShape()) {
+		case RECTANGLE:
+			nvgRect(getContext(), progressBar.getPositionX(), progressBar.getPositionY(), progressBar.getWidth(), progressBar.getHeight());
+			break;
+		case ROUNDED_RECT:
+			nvgRoundedRect(getContext(), progressBar.getPositionX(),  progressBar.getPositionY(), progressBar.getWidth(), progressBar.getHeight(), ((IVectorRoundedRect) progressBar).getRadius());
+			break;
+		default: 
+			break;
+		}
+		
+		if (progressBar instanceof SolidVectorProgressBar) {
+			nvgFillColor(getContext(), rgba(((SolidVectorProgressBar)progressBar).getFillColour()));
+		}
+		
+		// Render the border (again)
+		if (progressBar.colourProperties().hasBorder()) {
+			nvgStrokeColor(getContext(), rgba(progressBar.colourProperties().getBorderColour()));
+			nvgStrokeWidth(getContext(), progressBar.colourProperties().getBorderWidth());
+			nvgStroke(getContext());
+		}
+		nvgFill(getContext());
+		
+		popScissor(getContext());
 	}
 	
 	

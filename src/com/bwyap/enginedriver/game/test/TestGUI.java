@@ -6,16 +6,19 @@ import com.bwyap.engine.gui.element.CircularRadioButton;
 import com.bwyap.engine.gui.element.EllipticalButton;
 import com.bwyap.engine.gui.element.RectangularButton;
 import com.bwyap.engine.gui.element.RectangularCheckBox;
+import com.bwyap.engine.gui.element.RectangularSolidProgressBar;
 import com.bwyap.engine.gui.element.RoundedRectangularButton;
 import com.bwyap.engine.gui.element.RoundedRectangularCheckBox;
 import com.bwyap.engine.gui.element.RoundedRectangularPanel;
 import com.bwyap.engine.gui.element.RoundedRectangularPanelWindow;
 import com.bwyap.engine.gui.element.RoundedRectangularScrollArea;
+import com.bwyap.engine.gui.element.RoundedRectangularSolidProgressBar;
 import com.bwyap.engine.gui.element.RoundedRectangularTextBox;
 import com.bwyap.engine.gui.element.RoundedRectangularTextfield;
 import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.ETextAlignment;
 import com.bwyap.engine.gui.element.base.PanelWindow;
+import com.bwyap.engine.gui.element.base.ProgressBar.ProgressFillStyle;
 import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.base.ScrollArea.ScrollDirection;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
@@ -172,6 +175,24 @@ public class TestGUI extends NVGGUI {
 		group1.add(radio2);
 		group1.add(radio3);
 		
+		
+		RoundedRectangularSolidProgressBar bar1 = new RoundedRectangularSolidProgressBar(340, 5, 5, 200, 3) {
+
+			@Override
+			public void update(float timestep) {
+				this.addProgress(0.1f * timestep);
+			}
+		};
+		bar1.setFillStyle(ProgressFillStyle.DOWN);
+		
+		RectangularSolidProgressBar bar2 = new RectangularSolidProgressBar(5, 240, 340, 5) {
+			@Override
+			public void update(float timestep) {
+				this.addProgress(0.1f * timestep);
+			}
+		};
+
+		
 		PanelWindow window = new RoundedRectangularPanelWindow("", 5, 300, 350, 250, 5) {
 			@Override
 			protected void initElements() { }
@@ -182,6 +203,8 @@ public class TestGUI extends NVGGUI {
 		window.addElement(box1);
 		window.addElement(box2);
 		window.addElement(group1);
+		window.addElement(bar1);
+		window.addElement(bar2);
 		window.setReactToMouseOver(false);
 		window.setResizable(true);
 		addElement(1, window);

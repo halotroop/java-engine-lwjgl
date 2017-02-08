@@ -7,6 +7,7 @@ import com.bwyap.engine.gui.element.base.Button;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox;
+import com.bwyap.engine.gui.element.vector.VectorProgressBar;
 import com.bwyap.engine.gui.element.vector.VectorScrollArea;
 import com.bwyap.engine.gui.element.vector.VectorTextBox;
 import com.bwyap.engine.gui.element.vector.VectorTextField;
@@ -97,5 +98,12 @@ public interface GUIRendererInterface {
 	 * @param parentPanel
 	 */
 	public void renderRadioButtonGroup(RadioButtonGroup group, Panel parentPanel);
+	
+	
+	/**
+	 * Render a progress bar
+	 * @param progressBar
+	 */
+	public void renderVectorProgressBar(VectorProgressBar progressBar);
 	
 }
