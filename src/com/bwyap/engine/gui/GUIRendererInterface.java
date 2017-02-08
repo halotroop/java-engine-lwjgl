@@ -75,7 +75,7 @@ public interface GUIRendererInterface {
 	 * Render a text box
 	 * @param textBox
 	 */
-	public void renderTextBox(VectorTextBox textBox);
+	public void renderVectorTextBox(VectorTextBox textBox);
 	
 	
 	/**
