@@ -97,6 +97,10 @@ public class JSONResourceLibrary extends JSONWrapper {
 	}
 	
 	
+	public Map<String, String> getConfig() {
+		return getExternal("config");
+	}
+	
 
 	/**
 	 * Validate the loaded JSON file.
