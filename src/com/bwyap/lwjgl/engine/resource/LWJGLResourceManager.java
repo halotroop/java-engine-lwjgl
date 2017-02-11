@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.bwyap.engine.resource.ResourceManagerBase;
+import com.bwyap.enginedriver.resource.jsonwrapper.Settings;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGFont;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGTexture;
 import com.bwyap.lwjgl.engine.render3d.LWJGLTexture;
@@ -21,8 +22,13 @@ import com.bwyap.utility.resource.ResourceLoader;
  */
 public class LWJGLResourceManager extends ResourceManagerBase {
 	
+	public static final String RESOURCE_JSON = "/com/bwyap/engine/resource/resources.json";
+	
 	
 	private static LWJGLResourceManager instance;
+	
+	
+	private Settings settings;
 	
 	
 	/**
@@ -76,6 +82,15 @@ public class LWJGLResourceManager extends ResourceManagerBase {
 	}
 	
 	
+	/**
+	 * Get the settings object
+	 * @return
+	 */
+	public Settings settings() {
+		return settings;
+	}
+	
+	
 	/* 
 	 * ===============
 	 * PRIVATE METHODS
@@ -92,8 +107,12 @@ public class LWJGLResourceManager extends ResourceManagerBase {
 	
 	
 	private void loadConfig() {
-		//TODO
-		//
+		File configFile = new File(lib.getConfig().get("config_file"));
+		settings = new Settings(ResourceLoader.loadJSON(configFile));
+		if (!settings.isValid()) {
+			ResourceLoader.copyFileFromJar(configFile, null);
+			settings = new Settings(ResourceLoader.loadJSON(configFile));
+		}
 	}
 	
 	

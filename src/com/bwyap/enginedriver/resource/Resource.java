@@ -20,9 +20,7 @@ import com.bwyap.utility.resource.ResourceLoader;
  * @author bwyap
  *
  */
-public class Resource {
-	
-	public static final String RESOURCE_JSON = "/com/bwyap/engine/resource/resources.json";
+public class Resource {	
 	
 	
 	public static final String IN_ROOT = "/com/bwyap/enginedriver/";
