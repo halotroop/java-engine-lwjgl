@@ -38,7 +38,7 @@
 		},
 		
 		"config": {
-			"config"									: "data/config/config.json"
+			"config_file"							: "data/config/config.json"
 		}
 	}
 }
