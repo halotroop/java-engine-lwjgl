@@ -1,0 +1,44 @@
+{
+	"internal": {
+		
+		"shaders": {
+			"vertex" 									: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShader.vs",
+			"fragment" 								: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShader.vs",
+			"unlit_vertex" 						: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShaderUnlit.vs",
+			"unlit_fragment" 					: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShaderUnlit.vs",
+			"particle_vertex" 				: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleVertexShader.vs",
+			"particle_fragment" 			: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleFragmentShader.vs"
+		},
+
+		"meshes": {
+			"cube"										: "/com/bwyap/enginedriver/resource/obj/cube.obj",
+			"bunny"										: "/com/bwyap/enginedriver/resource/obj/bunny.obj",
+			"particle"								: "/com/bwyap/enginedriver/resource/obj/particle.obj"
+		},
+
+		"textures": {
+			"test"										: "/com/bwyap/enginedriver/resource/textures/texture.png",
+			"test_particle"						: "/com/bwyap/enginedriver/resource/textures/particle_smooth.png",
+			"test_animated_particle"	: "/com/bwyap/enginedriver/resource/textures/particle_anim.png",
+			"test_button"							: "/com/bwyap/enginedriver/resource/textures/button_normal.png",
+			"test_button_mouseover"		: "/com/bwyap/enginedriver/resource/textures/button_mouseover.png",
+			"test_button_pressed"			: "/com/bwyap/enginedriver/resource/textures/button_pressed.png",
+		},
+
+		"fonts": {
+			"aeromatics_reg"					: "/com/bwyap/enginedriver/resource/font/aeromatics_reg.ttf"
+		}
+	},
+	
+	"external": {
+		
+		"folders": {
+			"data_folder" 						: "data/",
+			"config_folder" 					: "data/config"
+		},
+		
+		"config": {
+			"config"									: "data/config/config.json"
+		}
+	}
+}

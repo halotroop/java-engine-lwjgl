@@ -22,6 +22,9 @@ import com.bwyap.utility.resource.ResourceLoader;
  */
 public class Resource {
 	
+	public static final String RESOURCE_JSON = "/com/bwyap/engine/resource/resources.json";
+	
+	
 	public static final String IN_ROOT = "/com/bwyap/enginedriver/";
 	
 	/* ==============
@@ -37,7 +40,7 @@ public class Resource {
 	public static final String IN_SHADER_UNLIT_VERTEX = "vertexShaderUnlit.vs";
 	public static final String IN_SHADER_UNLIT_FRAGMENT = "fragmentShaderUnlit.fs";
 	public static final String IN_SHADER_PARTICLE_VERTEX = "particleVertexShader.vs";
-	public static final String IN_SHADER_PARTICLE_GEOMETRY = "particleGeometryShader.gs";
+	//public static final String IN_SHADER_PARTICLE_GEOMETRY = "particleGeometryShader.gs";
 	public static final String IN_SHADER_PARTICLE_FRAGMENT = "particleFragmentShader.fs";
 	
 	// object meshes
@@ -126,7 +129,7 @@ public class Resource {
 		}
 		
 		//TODO
-		//
+		//		
 	}
 	
 	
