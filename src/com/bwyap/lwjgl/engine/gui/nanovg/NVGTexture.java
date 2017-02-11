@@ -45,9 +45,9 @@ public class NVGTexture extends Texture {
 	 * @return
 	 * @throws IOException 
 	 */
-	public static NVGTexture loadTexture(String name, String path, NVGRenderer renderer) throws IOException {
+	public static NVGTexture loadTexture(String name, String path, long ctx) throws IOException {
 		ByteBuffer img = ioResourceToByteBuffer(path, 64*64);
-		int textureID = nvgCreateImageMem(renderer.getContext(), 0, img);
+		int textureID = nvgCreateImageMem(ctx, 0, img);
 		loadedTextures.put(name, textureID);
 		return new NVGTexture(textureID);
 	}
@@ -61,8 +61,8 @@ public class NVGTexture extends Texture {
 	 * @return
 	 * @throws IOException
 	 */
-	public static NVGTexture loadTexture(String name, String path, NVGRenderer renderer, int row, int col) throws IOException {
-		return new NVGTexture(loadTexture(name, path, renderer).getID(), row, col);
+	public static NVGTexture loadTexture(String name, String path, long ctx, int row, int col) throws IOException {
+		return new NVGTexture(loadTexture(name, path, ctx).getID(), row, col);
 	}
 	
 	

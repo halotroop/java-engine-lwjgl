@@ -110,7 +110,7 @@ public class NVGRenderer extends GUIRenderer {
 			throw new Exception("Could not initialise NanoVG");
 		
 		// TODO clean this up
-		Resource.loadNVGTextures(this);
+		Resource.loadNVGTextures(getContext());
 		
 		loadedFonts = new HashSet<String>();		
 	}

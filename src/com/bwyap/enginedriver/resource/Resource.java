@@ -8,7 +8,6 @@ import org.lwjgl.glfw.GLFW;
 import com.bwyap.engine.input.InputMapping;
 import com.bwyap.enginedriver.resource.jsonwrapper.Settings;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGFont;
-import com.bwyap.lwjgl.engine.gui.nanovg.NVGRenderer;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGTexture;
 import com.bwyap.lwjgl.engine.render3d.LWJGLTexture;
 import com.bwyap.lwjgl.mesh.OBJLoader;
@@ -171,11 +170,11 @@ public class Resource {
 	/**
 	 * Load NVG textures for GUI rendering into the current NanoVG context
 	 */
-	public static void loadNVGTextures(NVGRenderer renderer) {
+	public static void loadNVGTextures(long ctx) {
 		try {
-			testButton = NVGTexture.loadTexture("testButton", TEX_TEST_BUTTON, renderer);
-			testButtonMouseover = NVGTexture.loadTexture("testButtonMouseover", TEX_TEST_BUTTON_MOUSEOVER, renderer);
-			testButtonPressed = NVGTexture.loadTexture("testButtonPressed", TEX_TEST_BUTTON_PRESSED, renderer);
+			testButton = NVGTexture.loadTexture("testButton", TEX_TEST_BUTTON, ctx);
+			testButtonMouseover = NVGTexture.loadTexture("testButtonMouseover", TEX_TEST_BUTTON_MOUSEOVER, ctx);
+			testButtonPressed = NVGTexture.loadTexture("testButtonPressed", TEX_TEST_BUTTON_PRESSED, ctx);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
