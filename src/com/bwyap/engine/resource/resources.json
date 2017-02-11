@@ -3,11 +3,11 @@
 		
 		"shaders": {
 			"vertex" 									: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShader.vs",
-			"fragment" 								: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShader.vs",
+			"fragment" 								: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShader.fs",
 			"unlit_vertex" 						: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShaderUnlit.vs",
-			"unlit_fragment" 					: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShaderUnlit.vs",
+			"unlit_fragment" 					: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShaderUnlit.fs",
 			"particle_vertex" 				: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleVertexShader.vs",
-			"particle_fragment" 			: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleFragmentShader.vs"
+			"particle_fragment" 			: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleFragmentShader.fs"
 		},
 
 		"meshes": {
