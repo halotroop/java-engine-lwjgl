@@ -6,8 +6,7 @@ import java.util.List;
 import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.MouseDownInterface;
 import com.bwyap.engine.input.InputHandler;
-import com.bwyap.engine.input.InputMapping;
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 
 /**
  * A GUI element that can be clicked by specified mouse buttons.
@@ -31,9 +30,8 @@ public abstract class ClickableElement extends GUIElement implements MouseDownIn
 		this.acceptedButtons = new ArrayList<Integer>();
 		mouseOverReact = true;
 		
-		// Default accepted buttons are mouse left and mouse right
-		acceptedButtons.add(Resource.inputMapping.getBinding(InputMapping.MOUSE_LEFT));
-		acceptedButtons.add(Resource.inputMapping.getBinding(InputMapping.MOUSE_RIGHT));
+		// Default accepted button is left click
+		acceptedButtons.add(LWJGLResourceManager.instance().inputMapping().getBinding("mouse_left"));
 	}
 	
 	

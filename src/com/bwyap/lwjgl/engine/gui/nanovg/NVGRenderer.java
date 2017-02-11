@@ -80,7 +80,7 @@ import com.bwyap.engine.gui.interfaces.IVectorRoundedRect;
 import com.bwyap.engine.gui.interfaces.MouseDownInterface;
 import com.bwyap.engine.gui.interfaces.MouseOverInterface;
 import com.bwyap.engine.window.WindowInterface;
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 
 
 /**
@@ -101,7 +101,7 @@ public class NVGRenderer extends GUIRenderer {
 	
 	public NVGRenderer() throws Exception {
 		// Initialise the GUI
-		if (Resource.Settings.isAntiAlias())
+		if (LWJGLResourceManager.instance().settings().isAntiAlias())
 			vgID = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
 		else 
 			vgID = nvgCreateGL3(NVG_STENCIL_STROKES);
@@ -110,7 +110,7 @@ public class NVGRenderer extends GUIRenderer {
 			throw new Exception("Could not initialise NanoVG");
 		
 		// TODO clean this up
-		Resource.loadNVGTextures(getContext());
+		LWJGLResourceManager.instance().loadNVGResources(getContext());
 		
 		loadedFonts = new HashSet<String>();		
 	}

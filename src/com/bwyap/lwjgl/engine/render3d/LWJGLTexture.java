@@ -40,20 +40,19 @@ import de.matthiasmann.twl.utils.PNGDecoder.Format;
  */
 public class LWJGLTexture extends Texture {
 	
-	private static Map<String, Integer> loadedTextures = new HashMap<String, Integer>();
+	private static Map<String, LWJGLTexture> loadedTextures = new HashMap<String, LWJGLTexture>();
 	
 	protected boolean hasAlpha;
 
 	
-	public LWJGLTexture(int textureID) {
-		super(textureID);
+	public LWJGLTexture(int textureID, int rows, int cols) {
+		super(textureID, rows, cols);
 		this.hasAlpha = false;
 	}
 	
 	
-	public LWJGLTexture(int textureID, int rows, int cols) {
-		super(textureID, rows, cols);
-		this.hasAlpha = false;
+	public LWJGLTexture(int textureID) {
+		this(textureID, 1, 1);
 	}
 	
 
@@ -89,12 +88,15 @@ public class LWJGLTexture extends Texture {
 	
 
 	/**
-	 * Loads a texture
+	 * Loads a texture atlas with the specified number of rows and columns
+	 * @param name
 	 * @param path
+	 * @param row
+	 * @param col
 	 * @return
 	 * @throws IOException 
 	 */
-	public static LWJGLTexture loadTexture(String name, String path) throws IOException {
+	public static LWJGLTexture loadTexture(String name, String path, int row, int col) throws IOException {
 		PNGDecoder decoder = new PNGDecoder(ResourceLoader.class.getResourceAsStream(path));
 		
 		ByteBuffer buf = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
@@ -121,22 +123,21 @@ public class LWJGLTexture extends Texture {
 		glGenerateMipmap(GL_TEXTURE_2D);
 		
 		// Put the texture in the list of loaded textures
-		loadedTextures.put(name, textureID);
+		LWJGLTexture texture = new LWJGLTexture(textureID, row, col);
+		loadedTextures.put(name, texture);
 		
-		return new LWJGLTexture(textureID);
+		return texture;
 	}
 	
 
 	/**
-	 * Loads a texture atlas with the specified number of rows and columns
+	 * Loads a texture
 	 * @param path
-	 * @param row
-	 * @param col
 	 * @return
 	 * @throws IOException
 	 */
-	public static LWJGLTexture loadTexture(String name, String path, int row, int col) throws IOException {
-		return new LWJGLTexture(loadTexture(name, path).getID(), row, col);
+	public static LWJGLTexture loadTexture(String name, String path) throws IOException {
+		return loadTexture(name, path, 1, 1);
 	}
 	
 	
@@ -146,7 +147,7 @@ public class LWJGLTexture extends Texture {
 	 * @param name
 	 * @return
 	 */
-	public static int getTexture(String name) {
+	public static LWJGLTexture getTexture(String name) {
 		return loadedTextures.get(name);
 	}
 

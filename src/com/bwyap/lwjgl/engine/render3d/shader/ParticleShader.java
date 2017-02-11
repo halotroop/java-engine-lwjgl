@@ -1,7 +1,5 @@
 package com.bwyap.lwjgl.engine.render3d.shader;
 
-import com.bwyap.enginedriver.resource.Resource;
-
 
 public class ParticleShader extends Shader {
 
@@ -13,8 +11,8 @@ public class ParticleShader extends Shader {
 	
 	@Override
 	public void init() throws Exception {
-	    createVertexShader(Resource.particleVertexShaderCode);
-	    createFragmentShader(Resource.particleFragmentShaderCode);
+	    createVertexShader(Shader.getSource("particle_vertex"));
+	    createFragmentShader(Shader.getSource("particle_fragment"));
 	    link();
 	    
 		// Create uniforms for modelView and projection matrices and texture

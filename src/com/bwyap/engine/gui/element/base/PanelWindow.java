@@ -9,8 +9,7 @@ import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.IFade;
 import com.bwyap.engine.gui.interfaces.ITextDisplay;
 import com.bwyap.engine.input.InputHandler;
-import com.bwyap.engine.input.InputMapping;
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 
 
 /**
@@ -81,7 +80,7 @@ public abstract class PanelWindow extends Panel implements IFade, ITextDisplay {
 		movable = true;
 		resizable = true;
 		title = new TextComponent(name);
-		title.setFontName(Resource.defaultFont);
+		title.setFontName(LWJGLResourceManager.instance().lib.getFont("default"));
 		title.setAlignment(ETextAlignment.TOP_CENTER);
 		title.setOffset(0, 3);
 		title.setTextSize(15.0f);
@@ -187,7 +186,7 @@ public abstract class PanelWindow extends Panel implements IFade, ITextDisplay {
 				input.getMouseY() < getPositionY() + getHeight())
 				|| resizing) {
 			// Check if the mouse is down
-			if (input.isMouseDown(Resource.inputMapping.getBinding(InputMapping.MOUSE_LEFT))) {
+			if (input.isMouseDown(LWJGLResourceManager.instance().inputMapping().getBinding("mouse_left"))) {
 				mouseOver = true;
 				if (!resizing) {
 					// Set resize origin
@@ -224,7 +223,7 @@ public abstract class PanelWindow extends Panel implements IFade, ITextDisplay {
 		// Check if the window should be moved
 		if (withinBounds((float)input.getMouseX(), (float)input.getMouseY()) || moving) {
 			// Check if the mouse is down
-			if (input.isMouseDown(Resource.inputMapping.getBinding(InputMapping.MOUSE_LEFT))) {
+			if (input.isMouseDown(LWJGLResourceManager.instance().inputMapping().getBinding("mouse_left"))) {
 				mouseOver = true;
 				if (!moving) {
 					// Set movement origin

@@ -1,14 +1,22 @@
 package com.bwyap.enginedriver;
 
-import com.bwyap.enginedriver.resource.Resource;
+import java.io.IOException;
+
 import com.bwyap.enginedriver.window.DriverWindow;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 
 public class EngineLauncherTest {
 	
 	public static void main(String[] args) {
-		Resource.load();
-		new DriverWindow().start();
+		LWJGLResourceManager.initInstance(LWJGLResourceManager.RESOURCE_JSON);
+
+		try {
+			LWJGLResourceManager.instance().loadIndepedentResources();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		new DriverWindow().start();
 	}
 
 }

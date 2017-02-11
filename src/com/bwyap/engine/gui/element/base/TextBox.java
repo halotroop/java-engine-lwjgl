@@ -4,7 +4,6 @@ import org.joml.Vector2f;
 
 import com.bwyap.engine.gui.interfaces.IColouredVectorShape;
 import com.bwyap.engine.window.BoundsInterface;
-import com.bwyap.enginedriver.resource.Resource;
 
 
 /**
@@ -28,7 +27,6 @@ public abstract class TextBox extends TextField implements IColouredVectorShape 
 		
 		text.setTextBox(true);
 		text.setAlignment(ETextAlignment.TOP_LEFT);
-		text.setFontName(Resource.defaultFont);
 		text.setPadding(absolutePadding, absolutePadding, absolutePadding, absolutePadding);
 		text.setTextBoxWidth(absoluteTextBoxWidth - 2 * absolutePadding);
 	}

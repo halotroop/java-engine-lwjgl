@@ -9,9 +9,9 @@ import org.joml.Vector3f;
 
 import com.bwyap.engine.input.InputHandler;
 import com.bwyap.engine.render3d.entity.RotatableEntity;
-import com.bwyap.enginedriver.resource.Resource;
 import com.bwyap.lwjgl.engine.entity.AnimatedRenderableObject;
 import com.bwyap.lwjgl.engine.entity.RenderableEntity;
+import com.bwyap.lwjgl.engine.render3d.LWJGLTexture;
 import com.bwyap.lwjgl.engine.render3d.Material;
 import com.bwyap.lwjgl.engine.render3d.scene.LightedObjectLayer;
 
@@ -25,15 +25,15 @@ public class TestLitSceneObjects extends LightedObjectLayer {
 		sqrt = 3;
 		for(int i = 0; i < sqrt*sqrt; i++) {
 			RenderableEntity cube = new RenderableEntity("cube");
-			cube.setTexture(Resource.testTexture);
+			cube.setTexture(LWJGLTexture.getTexture("test"));
 			cube.setMaterial(new Material(new Vector3f(0.7f, 1.0f, 0.7f), 0.1f));
 			cube.setPosition(new Vector3f((i % sqrt) * 3 , ((i / sqrt) * -3) - 3, i/5));
 			this.addEntity(cube);
 		}
 		
 		AnimatedRenderableObject acube = new AnimatedRenderableObject("cube");
-		Resource.testAnimatedParticleTexture.setAlpha(true);
-		acube.setTexture(Resource.testAnimatedParticleTexture);
+		LWJGLTexture.getTexture("test_animated_particle").setAlpha(true);
+		acube.setTexture(LWJGLTexture.getTexture("test_animated_particle"));
 		acube.setMaterial(new Material(new Vector3f(0.7f, 1.0f, 0.7f), 0.1f));
 		acube.setPosition(new Vector3f(-3, 0, 0));
 		this.addEntity(acube);		
@@ -41,7 +41,7 @@ public class TestLitSceneObjects extends LightedObjectLayer {
 		sqrt = 16;
 		for(int i = 0; i < sqrt*sqrt; i++) {
 			RenderableEntity icube = new RenderableEntity("icube");
-			icube.setTexture(Resource.testTexture);
+			icube.setTexture(LWJGLTexture.getTexture("test"));
 			icube.setMaterial(new Material(new Vector3f(0.7f, 1.0f, 0.7f), 0.1f));
 			icube.setPosition(new Vector3f(i % sqrt, i / sqrt, 0));
 			icube.setScale(0.4f);

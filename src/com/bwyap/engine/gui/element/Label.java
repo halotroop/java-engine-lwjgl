@@ -7,7 +7,7 @@ import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.GUIElementInterface;
 import com.bwyap.engine.gui.interfaces.ITextDisplay;
 import com.bwyap.engine.input.InputHandler;
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 
 
 /**
@@ -30,7 +30,7 @@ public class Label extends GUIElement implements GUIElementInterface, ITextDispl
 		text.setTextSize(20f);
 		text.setAlignment(ETextAlignment.TOP_LEFT);
 		// Set the font of the label text
-		text.setFontName(Resource.defaultFont);
+		text.setFontName(LWJGLResourceManager.instance().lib.getFont("default"));
 	}
 	
 	

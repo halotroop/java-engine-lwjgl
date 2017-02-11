@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 import com.bwyap.utility.StreamLogger;
 
 public class ResourceLoader {
@@ -217,7 +217,7 @@ public class ResourceLoader {
 			FileOutputStream outStream = new FileOutputStream(file)) {
 			
 			if (internalPath == null) {
-				in = ResourceLoader.class.getClass().getResourceAsStream(Resource.IN_RESPATH + file.getPath());
+				in = ResourceLoader.class.getClass().getResourceAsStream(LWJGLResourceManager.DEFAULT_INTERNAL_PATH + file.getPath());
 			}
 			else {
 				in = ResourceLoader.class.getClass().getResourceAsStream(internalPath);

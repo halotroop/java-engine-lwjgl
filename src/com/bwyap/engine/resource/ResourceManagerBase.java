@@ -12,7 +12,7 @@ import com.bwyap.utility.resource.ResourceLoader;
 public abstract class ResourceManagerBase implements ResourceManagerInterface {
 	
 	
-	protected final JSONResourceLibrary lib;
+	public final JSONResourceLibrary lib;
 	
 	
 	/**

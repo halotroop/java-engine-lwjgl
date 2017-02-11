@@ -2,7 +2,7 @@ package com.bwyap.enginedriver.window;
 
 import com.bwyap.engine.EngineInterface;
 import com.bwyap.enginedriver.GameEngine;
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 import com.bwyap.lwjgl.window.GLFWWindow;
 
  
@@ -23,25 +23,28 @@ public class DriverWindow extends GLFWWindow {
 	
 	
 	public DriverWindow() {
-		super(Resource.Settings.getWidth(), 
-				Resource.Settings.getHeight(), 
-				"EngineDriver v" + VERSION, 
-				Resource.Settings.isVSync(), 
-				Resource.Settings.usePolygonMode(), 
-				Resource.Settings.showFpsWindow());
+		super(LWJGLResourceManager.instance().settings().getWidth(),
+				LWJGLResourceManager.instance().settings().getHeight(),
+				"EngineDriver v" + VERSION,
+				LWJGLResourceManager.instance().settings().isVSync(),
+				LWJGLResourceManager.instance().settings().usePolygonMode(),
+				LWJGLResourceManager.instance().settings().showFpsWindow());
 	}
 	
 	
 	@Override
 	public void loadGLRequiredResources() {
-		Resource.loadLWJGLTextures();
-		Resource.loadMeshes();
+		try {
+			LWJGLResourceManager.instance().loadDependentResources();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	
 	@Override
 	public EngineInterface createEngine() throws Exception {
-		return new GameEngine(this, Resource.Settings.getFPS());
+		return new GameEngine(this, LWJGLResourceManager.instance().settings().getFPS());
 	}
 	
 }

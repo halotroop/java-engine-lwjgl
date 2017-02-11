@@ -97,8 +97,24 @@ public class JSONResourceLibrary extends JSONWrapper {
 	}
 	
 	
+	/**
+	 * Get the configuration file paths specified by the resource library
+	 * @return
+	 */
 	public Map<String, String> getConfig() {
 		return getExternal("config");
+	}
+	
+	
+	// RESOURCE MAPPINGS
+	
+	/**
+	 * Get a font from the font library
+	 * @param fontAlias
+	 * @return
+	 */
+	public String getFont(String fontAlias) {
+		return ((JSONObject)((JSONObject)((JSONObject)object).get("mapping")).get("font")).get(fontAlias).toString();
 	}
 	
 

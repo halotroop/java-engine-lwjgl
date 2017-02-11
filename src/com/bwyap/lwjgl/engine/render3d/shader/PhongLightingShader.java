@@ -1,6 +1,5 @@
 package com.bwyap.lwjgl.engine.render3d.shader;
 
-import com.bwyap.enginedriver.resource.Resource;
 import com.bwyap.lwjgl.engine.render3d.Material;
 import com.bwyap.lwjgl.engine.render3d.light.DirectionalLight;
 import com.bwyap.lwjgl.engine.render3d.light.PointLight;
@@ -27,8 +26,8 @@ public class PhongLightingShader extends Shader {
 	 */
 	@Override
 	public void init() throws Exception {
-		createVertexShader(Resource.vertexShaderCode);
-		createFragmentShader(Resource.fragmentShaderCode);
+		createVertexShader(Shader.getSource("vertex"));
+		createFragmentShader(Shader.getSource("fragment"));
 		link();
 		
 		// Create uniforms for modelView and projection matrices and texture

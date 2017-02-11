@@ -30,6 +30,7 @@
 		}
 	},
 	
+	
 	"external": {
 		
 		"folders": {
@@ -38,7 +39,31 @@
 		},
 		
 		"config": {
-			"config_file"							: "data/config/config.json"
+			"config_file"							: "data/config/config.json",
+			"input_file"							: "data/config/input.json"
+		}
+	},
+	
+	
+	"mapping": {
+		
+		"mesh": {
+			"cube"										: "cube",
+			"bunny"										: "bunny",
+			"particle"								: "particle"
+		},
+
+		"texture": {
+			"test"										: "test",
+			"test_particle"						: "test_particle",
+			"test_animated_particle"	: "test_animated_particle",
+			"test_button"							: "test_button",
+			"test_button_mouseover"		: "test_button_mouseover",
+			"test_button_pressed"			: "test_button_pressed",
+		},
+
+		"font": {
+			"default"					: "aeromatics_reg"
 		}
 	}
 }

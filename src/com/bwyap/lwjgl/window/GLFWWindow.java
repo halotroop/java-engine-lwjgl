@@ -56,7 +56,7 @@ import org.lwjgl.opengl.GL;
 
 import com.bwyap.engine.input.InputHandler;
 import com.bwyap.engine.window.Window;
-import com.bwyap.enginedriver.resource.Resource;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 import com.bwyap.lwjgl.window.input.GLFWKeyboardHandler;
 import com.bwyap.lwjgl.window.input.GLFWMouseHandler;
 
@@ -200,7 +200,7 @@ public abstract class GLFWWindow extends Window {
 				GLFWWindow.this.width = width;
 				GLFWWindow.this.height = height;
 				GLFWWindow.this.setResized(true);
-				glfwSetWindowAspectRatio(window, Resource.Settings.getWidth(), Resource.Settings.getHeight());
+				glfwSetWindowAspectRatio(window, LWJGLResourceManager.instance().settings().getWidth(), LWJGLResourceManager.instance().settings().getHeight());
 			}
 		});
 				

@@ -22,15 +22,16 @@ import com.bwyap.engine.gui.element.base.ProgressBar.ProgressFillStyle;
 import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.base.ScrollArea.ScrollDirection;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox.CheckBoxCheckStyle;
-import com.bwyap.enginedriver.resource.Resource;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGGUI;
 import com.bwyap.lwjgl.engine.gui.nanovg.NVGRenderer;
+import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 
 public class TestGUI extends NVGGUI {
 	
 	
 	public TestGUI() {
-		super(Resource.Settings.getWidth(), Resource.Settings.getHeight());
+		super(LWJGLResourceManager.instance().settings().getWidth(),
+				LWJGLResourceManager.instance().settings().getHeight());
 	}
 	
 	
@@ -47,7 +48,7 @@ public class TestGUI extends NVGGUI {
 		button.colourProperties().setMouseoverColour(0, 1, 0, 1);
 		button.colourProperties().setHasBorder(true);
 		button.colourProperties().setBorderColour(0, 1, 1, 1);
-		button.getTextComponent().setFontName(Resource.defaultFont);
+		button.getTextComponent().setFontName(LWJGLResourceManager.instance().lib.getFont("default"));
 		button.getTextComponent().setText("Press me now 123456789");
 		addElement(button);
 		
@@ -79,9 +80,9 @@ public class TestGUI extends NVGGUI {
 				System.out.println("Pressed textured with " + mouseButton);				
 			}
 		};
-		tbutton.setTexture("testButton");
-		tbutton.setMouseoverTexture("testButtonMouseover");
-		tbutton.setPressedTexture("testButtonPressed");
+		tbutton.setTexture("test_button");
+		tbutton.setMouseoverTexture("test_button_mouseover");
+		tbutton.setPressedTexture("test_button_pressed");
 		addElement(tbutton);
 		
 		
@@ -92,7 +93,7 @@ public class TestGUI extends NVGGUI {
 			}
 		};
 		field.getTextComponent().setAlignment(ETextAlignment.LEFT);
-		field.getTextComponent().setFontName(Resource.defaultFont);
+		field.getTextComponent().setFontName(LWJGLResourceManager.instance().lib.getFont("default"));
 		field.getTextComponent().setPadding(5, 5, 5, 5);
 		field.colourProperties().setHasBorder(true);
 		addElement(field);
@@ -123,7 +124,7 @@ public class TestGUI extends NVGGUI {
 		button2.colourProperties().setMouseoverColour(0, 1, 0, 1);
 		button2.colourProperties().setHasBorder(true);
 		button2.colourProperties().setBorderColour(0, 1, 1, 1);
-		button2.getTextComponent().setFontName(Resource.defaultFont);
+		button2.getTextComponent().setFontName(LWJGLResourceManager.instance().lib.getFont("default"));
 		button2.getTextComponent().setText("Press me 2");
 		button2.setPositionAbsolute(true);
 		window2.addElement(button2);
@@ -139,6 +140,7 @@ public class TestGUI extends NVGGUI {
 		};
 		textbox.colourProperties().setColour(0.8f, 0.8f, 0.8f, 0.8f);
 		textbox.getTextComponent().setTextColour(0.1f, 0.0f, 0.0f, 1.0f);
+		textbox.getTextComponent().setFontName(LWJGLResourceManager.instance().lib.getFont("default"));
 		textbox.getTextComponent().setText(""
 				+ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
 				+ "sed do eiusmod tempor incididunt ut labore et dolore magna.");
