@@ -43,6 +43,36 @@ import org.lwjgl.BufferUtils;
  */
 public abstract class Shader {
 	
+	
+	private static final Map<String, String> sources = new HashMap<String, String>();
+	
+	
+	/**
+	 * Get the source code of the shader with the given name
+	 * from the static Map of loaded shader sources.
+	 * If the specified shader has not been loaded, this 
+	 * method will return {@code null}. 
+	 * @param shaderName
+	 * @return
+	 */
+	public static String getSource(String shaderName) {
+		return sources.get(shaderName);
+	}
+	
+	
+	/**
+	 * Add the source code of the shader with the given name
+	 * to the static Map of shader sources. This will allow
+	 * the source code of the shader to be retrieved by name.
+	 * @param shaderName
+	 * @param sourceCode
+	 */
+	public static void addSource(String shaderName, String sourceCode) {
+		sources.put(shaderName, sourceCode);
+	}
+	
+	
+	
 	protected final int programID;
 	protected final Map<String, Integer> uniforms;
 	
