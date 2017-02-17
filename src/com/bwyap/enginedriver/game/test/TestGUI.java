@@ -17,6 +17,7 @@ import com.bwyap.engine.gui.element.RoundedRectangularTextBox;
 import com.bwyap.engine.gui.element.RoundedRectangularTextfield;
 import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.ETextAlignment;
+import com.bwyap.engine.gui.element.base.ImageHolder;
 import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.ProgressBar.ProgressFillStyle;
 import com.bwyap.engine.gui.element.base.RadioButtonGroup;
@@ -211,6 +212,9 @@ public class TestGUI extends NVGGUI {
 		window.setResizable(true);
 		addElement(1, window);
 		
+		
+		ImageHolder image = new ImageHolder("test_image", 500, 50, 100, 100);
+		addElement(1, image);
 	}
 	
 

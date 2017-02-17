@@ -4,6 +4,7 @@ import org.joml.Vector2f;
 
 import com.bwyap.engine.gui.element.Label;
 import com.bwyap.engine.gui.element.base.Button;
+import com.bwyap.engine.gui.element.base.ImageHolder;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.base.RadioButtonGroup;
 import com.bwyap.engine.gui.element.vector.VectorCheckBox;
@@ -106,4 +107,10 @@ public interface GUIRendererInterface {
 	 */
 	public void renderVectorProgressBar(VectorProgressBar progressBar);
 	
+	
+	/**
+	 * Render an image
+	 * @param holder
+	 */
+	public void renderImage(ImageHolder holder);
 }

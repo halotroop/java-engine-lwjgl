@@ -2,31 +2,32 @@
 	"internal": {
 		
 		"shaders": {
-			"vertex" 									: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShader.vs",
-			"fragment" 								: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShader.fs",
-			"unlit_vertex" 						: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShaderUnlit.vs",
-			"unlit_fragment" 					: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShaderUnlit.fs",
-			"particle_vertex" 				: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleVertexShader.vs",
-			"particle_fragment" 			: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleFragmentShader.fs"
+			"vertex" 					: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShader.vs",
+			"fragment" 					: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShader.fs",
+			"unlit_vertex" 				: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/vertexShaderUnlit.vs",
+			"unlit_fragment" 			: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/fragmentShaderUnlit.fs",
+			"particle_vertex" 			: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleVertexShader.vs",
+			"particle_fragment" 		: "/com/bwyap/lwjgl/engine/render3d/shader/shaders/particleFragmentShader.fs"
 		},
 
 		"meshes": {
-			"cube"										: "/com/bwyap/enginedriver/resource/obj/cube.obj",
-			"bunny"										: "/com/bwyap/enginedriver/resource/obj/bunny.obj",
-			"particle"								: "/com/bwyap/enginedriver/resource/obj/particle.obj"
+			"cube"						: "/com/bwyap/enginedriver/resource/obj/cube.obj",
+			"bunny"						: "/com/bwyap/enginedriver/resource/obj/bunny.obj",
+			"particle"					: "/com/bwyap/enginedriver/resource/obj/particle.obj"
 		},
 
 		"textures": {
-			"test"										: "/com/bwyap/enginedriver/resource/textures/texture.png",
-			"test_particle"						: "/com/bwyap/enginedriver/resource/textures/particle_smooth.png",
+			"test"						: "/com/bwyap/enginedriver/resource/textures/texture.png",
+			"test_particle"				: "/com/bwyap/enginedriver/resource/textures/particle_smooth.png",
 			"test_animated_particle"	: "/com/bwyap/enginedriver/resource/textures/particle_anim.png",
-			"test_button"							: "/com/bwyap/enginedriver/resource/textures/button_normal.png",
+			"test_button"				: "/com/bwyap/enginedriver/resource/textures/button_normal.png",
 			"test_button_mouseover"		: "/com/bwyap/enginedriver/resource/textures/button_mouseover.png",
-			"test_button_pressed"			: "/com/bwyap/enginedriver/resource/textures/button_pressed.png",
+			"test_button_pressed"		: "/com/bwyap/enginedriver/resource/textures/button_pressed.png",
+			"test_image"				: "/com/bwyap/enginedriver/resource/textures/test_image.png"
 		},
 
 		"fonts": {
-			"aeromatics_reg"					: "/com/bwyap/enginedriver/resource/font/aeromatics_reg.ttf"
+			"aeromatics_reg"			: "/com/bwyap/enginedriver/resource/font/aeromatics_reg.ttf"
 		}
 	},
 	
@@ -34,13 +35,13 @@
 	"external": {
 		
 		"folders": {
-			"data_folder" 						: "data/",
-			"config_folder" 					: "data/config"
+			"data_folder" 				: "data/",
+			"config_folder" 			: "data/config"
 		},
 		
 		"config": {
-			"config_file"							: "data/config/config.json",
-			"input_file"							: "data/config/input.json"
+			"config_file"				: "data/config/config.json",
+			"input_file"				: "data/config/input.json"
 		}
 	},
 	
@@ -48,18 +49,18 @@
 	"mapping": {
 		
 		"mesh": {
-			"cube"										: "cube",
-			"bunny"										: "bunny",
-			"particle"								: "particle"
+			"cube"						: "cube",
+			"bunny"						: "bunny",
+			"particle"					 "particle"
 		},
 
 		"texture": {
-			"test"										: "test",
-			"test_particle"						: "test_particle",
+			"test"						: "test",
+			"test_particle"				: "test_particle",
 			"test_animated_particle"	: "test_animated_particle",
-			"test_button"							: "test_button",
+			"test_button"				: "test_button",
 			"test_button_mouseover"		: "test_button_mouseover",
-			"test_button_pressed"			: "test_button_pressed",
+			"test_button_pressed"		: "test_button_pressed",
 		},
 
 		"font": {

@@ -202,6 +202,7 @@ public class LWJGLResourceManager extends ResourceManagerBase {
 		NVGTexture.loadTexture("test_button", lib.getTextures().get("test_button"), ctx);
 		NVGTexture.loadTexture("test_button_mouseover", lib.getTextures().get("test_button_mouseover"), ctx);
 		NVGTexture.loadTexture("test_button_pressed", lib.getTextures().get("test_button_pressed"), ctx);
+		NVGTexture.loadTexture("test_image", lib.getTextures().get("test_image"), ctx);
 	}
 	
 }

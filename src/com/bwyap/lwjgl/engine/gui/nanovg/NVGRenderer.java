@@ -56,6 +56,7 @@ import com.bwyap.engine.gui.GUIRenderer;
 import com.bwyap.engine.gui.element.Label;
 import com.bwyap.engine.gui.element.TexturedButton;
 import com.bwyap.engine.gui.element.base.Button;
+import com.bwyap.engine.gui.element.base.ImageHolder;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.element.base.PanelWindow;
 import com.bwyap.engine.gui.element.base.RadioButton;
@@ -194,6 +195,7 @@ public class NVGRenderer extends GUIRenderer {
 			else if (e instanceof Label) renderLabel((Label)e);
 			else if (e instanceof VectorTextBox) renderVectorTextBox((VectorTextBox)e);
 			else if (e instanceof VectorTextField) renderVectorTextField((VectorTextField)e);
+			else if (e instanceof ImageHolder) renderImage((ImageHolder)e);
 			else if (e instanceof Panel) {
 				if (e instanceof PanelWindow) resetAlpha = false;
 				renderPanel((Panel)e, window, panel.getPosition());
@@ -395,6 +397,18 @@ public class NVGRenderer extends GUIRenderer {
 		nvgBeginPath(getContext());
 		nvgCircle(getContext(), ox + r, oy + r, r - padding);
 		nvgFillColor(getContext(), rgba(radio.getCheckColour())); 
+		nvgFill(getContext());
+	}
+	
+	
+	@Override
+	public void renderImage(ImageHolder holder) {
+		NVGPaint paint = NVGPaint.create();
+		nvgImagePattern(getContext(), holder.getImageX(), holder.getImageY(), holder.getImageWidth(), holder.getImageHeight(), 0, NVGTexture.getTexture(holder.getTextureName()), 1, paint);
+		
+		nvgBeginPath(getContext());
+		nvgRect(getContext(), holder.getPositionX(), holder.getPositionY(), holder.getWidth(), holder.getHeight());
+		nvgFillPaint(getContext(), paint);
 		nvgFill(getContext());
 	}
 	
