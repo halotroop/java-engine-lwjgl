@@ -41,7 +41,9 @@ public class NVGTexture extends Texture {
 
 	/**
 	 * Loads a texture
+	 * @param name
 	 * @param path
+	 * @param ctx
 	 * @return
 	 * @throws IOException 
 	 */
