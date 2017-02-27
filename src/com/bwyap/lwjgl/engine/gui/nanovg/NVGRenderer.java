@@ -32,7 +32,7 @@ import static org.lwjgl.nanovg.NanoVG.nvgTextAlign;
 import static org.lwjgl.nanovg.NanoVG.nvgTextBox;
 import static org.lwjgl.nanovg.NanoVGGL3.NVG_ANTIALIAS;
 import static org.lwjgl.nanovg.NanoVGGL3.NVG_STENCIL_STROKES;
-import static org.lwjgl.nanovg.NanoVGGL3.nvgCreateGL3;
+import static org.lwjgl.nanovg.NanoVGGL3.nvgCreate;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
@@ -103,9 +103,9 @@ public class NVGRenderer extends GUIRenderer {
 	public NVGRenderer() throws Exception {
 		// Initialise the GUI
 		if (LWJGLResourceManager.instance().settings().isAntiAlias())
-			vgID = nvgCreateGL3(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
+			vgID = nvgCreate(NVG_ANTIALIAS | NVG_STENCIL_STROKES);
 		else 
-			vgID = nvgCreateGL3(NVG_STENCIL_STROKES);
+			vgID = nvgCreate(NVG_STENCIL_STROKES);
 		
 		if (vgID == NULL) 
 			throw new Exception("Could not initialise NanoVG");
@@ -490,8 +490,8 @@ public class NVGRenderer extends GUIRenderer {
 			break;
 		}
 		
-		if (text.isTextBox()) nvgTextBox(getContext(), xPos, yPos, text.getTextBoxWidth(), text.getText(), 0);
-		else nvgText(getContext(), xPos, yPos, text.getText(), 0);
+		if (text.isTextBox()) nvgTextBox(getContext(), xPos, yPos, text.getTextBoxWidth(), text.getText());
+		else nvgText(getContext(), xPos, yPos, text.getText());
 		
 		if (text.isClipText()) popScissor(getContext());
 	}
