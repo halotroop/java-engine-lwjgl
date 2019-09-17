@@ -8,11 +8,11 @@ import com.bwyap.lwjgl.engine.particle.AnimatedParticle;
 import com.bwyap.lwjgl.engine.particle.ParticleSystem;
 import com.bwyap.lwjgl.engine.render3d.LWJGLTexture;
 
-public class TestAnimatedParticleSystem extends ParticleSystem<AnimatedParticle> {
-
-	public TestAnimatedParticleSystem(LWJGLTexture texture) throws Exception {
+public class TestAnimatedParticleSystem extends ParticleSystem<AnimatedParticle>
+{
+	public TestAnimatedParticleSystem(LWJGLTexture texture) throws Exception
+	{
 		super(texture, 1000, 10, 0.1f);
-
 		this.setActive(true);
 		this.setParticleLifetime(3f, 0);
 		this.setBaseVelocity(new Vector3f(0, 3, 0));
@@ -22,16 +22,14 @@ public class TestAnimatedParticleSystem extends ParticleSystem<AnimatedParticle>
 		this.setVelocityDirectionVariance(0.5f);
 		this.setEmitRadius(0.5f);
 	}
-	
 
 	@Override
-	protected void setMesh() throws Exception {
-		this.setMesh("particle");
-	}
+	protected void setMesh() throws Exception
+	{ this.setMesh("particle"); }
 
-	
 	@Override
-	protected AnimatedParticle generateNewParticle(float now) {
+	protected AnimatedParticle generateNewParticle(float now)
+	{
 		TestAnimatedParticle p = new TestAnimatedParticle(now, (new Random().nextFloat() * (particleLifetimeMax - particleLifetimeMin)) + particleLifetimeMin, 0.03f);
 		p.setColour(generateColour());
 		p.setRadius(generateRadius());
@@ -39,5 +37,4 @@ public class TestAnimatedParticleSystem extends ParticleSystem<AnimatedParticle>
 		p.setVelocity(generateStartVelocity());
 		return p;
 	}
-
 }

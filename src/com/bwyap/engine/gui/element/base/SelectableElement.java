@@ -4,95 +4,79 @@ import com.bwyap.engine.gui.interfaces.GUIBoundsInterface;
 import com.bwyap.engine.gui.interfaces.ISelectable;
 import com.bwyap.engine.input.InputHandler;
 
-
-/**
- * A clickable GUI element which can be selected.
+/** A clickable GUI element which can be selected.
  * Accepted select buttons are inherited from the ClickableElement class.
- * @author bwyap
- *
- */
-public abstract class SelectableElement extends ClickableElement implements ISelectable {
-
-	private boolean selected;	
+ * 
+ * @author bwyap */
+public abstract class SelectableElement extends ClickableElement implements ISelectable
+{
+	private boolean selected;
 	private boolean selectable;
-	
-	public SelectableElement(float x, float y, float width, float height) {
+
+	public SelectableElement(float x, float y, float width, float height)
+	{
 		super(x, y, width, height);
 		selected = false;
 		selectable = true;
 	}
-	
-	
-	@Override
-	public boolean isSelectable() {
-		return selectable;
-	}
-	
-	
-	@Override
-	public void setSelectable(boolean selectable) {
-		this.selectable = selectable;
-	}
-	
-
-	/**
-	 * Set whether the GUI element has been selected or not.
-	 * @param selected
-	 * @return
-	 */
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-	
-	
-	@Override
-	public final boolean isSelected() {
-		return selected;
-	}
-
 
 	@Override
-	public void onMouseClicked(float x, float y, int mouseButton) {
-		if (selectable) {
-			for (int button : acceptedButtons) {
-				if (button == mouseButton && !isSelected()) {
+	public boolean isSelectable()
+	{ return selectable; }
+
+	@Override
+	public void setSelectable(boolean selectable)
+	{ this.selectable = selectable; }
+
+	/** Set whether the GUI element has been selected or not.
+	 * 
+	 * @param  selected
+	 * @return */
+	public void setSelected(boolean selected)
+	{ this.selected = selected; }
+
+	@Override
+	public final boolean isSelected()
+	{ return selected; }
+
+	@Override
+	public void onMouseClicked(float x, float y, int mouseButton)
+	{
+		if (selectable)
+		{
+			for (int button : acceptedButtons)
+			{
+				if (button == mouseButton && !isSelected())
+				{
 					setSelected(true);
 					onSelect();
-					break; 
+					break;
 				}
 			}
 		}
 	}
-	
 
 	@Override
-	public void onMouseOver(float x, float y) {}
-	
+	public void onMouseOver(float x, float y)
+	{}
 
-	/**
-	 * {@inheritDoc}
+	/** {@inheritDoc}
 	 * Handles the deselection of the element when the mouse is clicked
 	 * outside the bounds of the element.
-	 * <p>Override this method for custom input handling functionality.</p>
-	 */
+	 * <p>Override this method for custom input handling functionality.</p> */
 	@Override
-	public void onHandleInput(InputHandler input, GUIBoundsInterface bounds) {
-		if (!mouseOver && input.isMouseDown() && isSelected()) {
+	public void onHandleInput(InputHandler input, GUIBoundsInterface bounds)
+	{
+		if (!mouseOver && input.isMouseDown() && isSelected())
+		{
 			setSelected(false);
 			onDeselect();
 		}
 	}
-	
-	
-	/**
-	 * Action to perform when the element is selected
-	 */
-	public abstract void onSelect();
-	
-	
-	/**
-	 * Action to perform when the element is deselected
-	 */
-	public abstract void onDeselect();
 
+	/** Action to perform when the element is selected */
+	public abstract void onSelect();
+
+	/** Action to perform when the element is deselected */
+	public abstract void onDeselect();
 }

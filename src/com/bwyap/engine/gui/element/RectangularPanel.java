@@ -3,30 +3,20 @@ package com.bwyap.engine.gui.element;
 import com.bwyap.engine.gui.element.base.Panel;
 import com.bwyap.engine.gui.interfaces.IVectorRect;
 
-
-/**
- * A rectangular panel.
+/** A rectangular panel.
  * See {@link Panel}.
- * @author bwyap
- *
- */
-public class RectangularPanel extends Panel implements IVectorRect {
-	
+ * 
+ * @author bwyap */
+public class RectangularPanel extends Panel implements IVectorRect
+{
+	public RectangularPanel(float x, float y, float width, float height)
+	{ super(x, y, width, height); }
 
-	public RectangularPanel(float x, float y, float width, float height) {
-		super(x, y, width, height);
-	}
-	
-	
 	@Override
-	public float getWidth() {
-		return bounds.x;
-	}
-	
-	
+	public float getWidth()
+	{ return bounds.x; }
+
 	@Override
-	public float getHeight() {
-		return bounds.y;
-	}
-	
+	public float getHeight()
+	{ return bounds.y; }
 }

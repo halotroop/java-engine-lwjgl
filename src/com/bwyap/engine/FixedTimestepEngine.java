@@ -2,64 +2,51 @@ package com.bwyap.engine;
 
 import com.bwyap.engine.window.WindowInterface;
 
-/**
- * An Engine implementation which uses a fixed time loop.
- * This class should be extended to provide implementations 
+/** An Engine implementation which uses a fixed time loop.
+ * This class should be extended to provide implementations
  * for the {@code update} and {@code render} methods.
- * @author bwyap
- *
- */
-public abstract class FixedTimestepEngine extends Engine {
-	
+ * 
+ * @author bwyap */
+public abstract class FixedTimestepEngine extends Engine
+{
+	public FixedTimestepEngine(WindowInterface window, int targetFPS) throws Exception
+	{ super(window, targetFPS); }
 
-	public FixedTimestepEngine(WindowInterface window, int targetFPS) throws Exception {
-		super(window, targetFPS);
-	}
-	
-	
-	/**
-	 * Run the engine loop using a fixed timestep. 
-	 * This method should not be altered.
-	 */
+	/** Run the engine loop using a fixed timestep.
+	 * This method should not be altered. */
 	@Override
-	public final void run() {
+	public final void run()
+	{
 		float now, delta;
-		float last = 0f, fpsTimer = 0f, secsPerUpdate = 1f/targetFPS;
+		float last = 0f, fpsTimer = 0f, secsPerUpdate = 1f / targetFPS;
 		int fps = 0;
-		
 		init();
-		
-		while (!window.shouldClose()) {
+		while (!window.shouldClose())
+		{
 			now = this.getCurrentTime();
 			delta = now - last;
 			last = now;
-			
 			window.processEvents();
 			update(delta);
 			render(delta);
 			window.swapDisplayBuffers();
-			
 			fps++;
 			fpsTimer += delta;
-			
-			window.setFpsDisplay(fps/fpsTimer);
-			
-			if (fpsTimer >= 1.0f) {
+			window.setFpsDisplay(fps / fpsTimer);
+			if (fpsTimer >= 1.0f)
+			{
 				this.fps = fps;
 				fpsTimer -= 1.0f;
 				fps = 0;
 			}
-			
-			while ((float) this.getCurrentTime() < now + secsPerUpdate) {
+			while ((float) this.getCurrentTime() < now + secsPerUpdate)
+			{
 				// wait 
 			}
 		}
-		
 		cleanup();
 	}
 }
-
-
 // Old method
 /*
 public final void run() {

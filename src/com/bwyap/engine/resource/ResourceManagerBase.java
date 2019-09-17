@@ -2,27 +2,19 @@ package com.bwyap.engine.resource;
 
 import com.bwyap.utility.resource.ResourceLoader;
 
-/**
- * A base class for a Resource manager. Each implementation
+/** A base class for a Resource manager. Each implementation
  * of this engine should have its own subclass of this class.
  * The ResourceManager should be implemented as a Singleton.
- * @author bwyap
- *
- */
-public abstract class ResourceManagerBase implements ResourceManagerInterface {
-	
-	
+ * 
+ * @author bwyap */
+public abstract class ResourceManagerBase implements ResourceManagerInterface
+{
 	public final JSONResourceLibrary lib;
-	
-	
-	/**
-	 * Create a new resource manager with the 
+
+	/** Create a new resource manager with the
 	 * resource library specified at the path
-	 * @param JSONPath
-	 */
-	protected ResourceManagerBase(String JSONPath) {
-		lib = new JSONResourceLibrary(ResourceLoader.loadInternalJSON(JSONPath));
-	}
-	
-	
+	 * 
+	 * @param JSONPath */
+	protected ResourceManagerBase(String JSONPath)
+	{ lib = new JSONResourceLibrary(ResourceLoader.loadInternalJSON(JSONPath)); }
 }

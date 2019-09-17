@@ -60,54 +60,47 @@ import com.bwyap.lwjgl.engine.resource.LWJGLResourceManager;
 import com.bwyap.lwjgl.window.input.GLFWKeyboardHandler;
 import com.bwyap.lwjgl.window.input.GLFWMouseHandler;
 
-/**
- * A GLFW window with input handlers.
- * The {@code start()} method will start a loop which call the 
+/** A GLFW window with input handlers.
+ * The {@code start()} method will start a loop which call the
  * {@code update} and {@code render} methods on a {@GLFWGame} object.
  * <p>
  * The method {@code createGame()} method should be overridden to
  * load a more specific and concrete implementation of GLFWGame.
  * 
- * @author bwyap
- *
- */
-public abstract class GLFWWindow extends Window {
-
+ * @author bwyap */
+public abstract class GLFWWindow extends Window
+{
 	private long window;
 	private boolean vSync;
 	private boolean polygonMode;
-	
 	private GLFWKeyboardHandler keyboardHandler;
 	private GLFWMouseHandler mouseHandler;
-	
 	// Callbacks
-	GLFWErrorCallback		errorCallback;
-	GLFWWindowSizeCallback	windowSizeCallback;
-	GLFWKeyCallback			keyCallback;
+	GLFWErrorCallback errorCallback;
+	GLFWWindowSizeCallback windowSizeCallback;
+	GLFWKeyCallback keyCallback;
 	GLFWMouseButtonCallback mouseButtonCallback;
-	GLFWCursorPosCallback	cursorPosCallback;
-	GLFWScrollCallback		scrollCallback;
-	GLFWCursorEnterCallback	cursorEnterCallback;
-	
-	
-	/**
-	 * A GLFW window.
+	GLFWCursorPosCallback cursorPosCallback;
+	GLFWScrollCallback scrollCallback;
+	GLFWCursorEnterCallback cursorEnterCallback;
+
+	/** A GLFW window.
+	 * 
 	 * @param width
-	 * @param height
-	 */
-	public GLFWWindow(int width, int height, String title, boolean vSync, boolean polygonMode, boolean showFps) {
+	 * @param height */
+	public GLFWWindow(int width, int height, String title, boolean vSync, boolean polygonMode, boolean showFps)
+	{
 		super(width, height, title, showFps);
 		this.vSync = vSync;
 		this.polygonMode = polygonMode;
 	}
-	
-	
+
 	@Override
-	public void init() {
+	public void init()
+	{
 		// Initialize GLFW. Most GLFW functions will not work before doing this.
-		if (!glfwInit()) 
+		if (!glfwInit())
 			throw new IllegalStateException("Unable to initialize GLFW");
-		
 		//Configure the window
 		glfwDefaultWindowHints(); // optional, the current window hints are already the default
 		glfwWindowHint(GLFW_SAMPLES, 4);
@@ -117,196 +110,156 @@ public abstract class GLFWWindow extends Window {
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-		
 		//Create the window
 		window = glfwCreateWindow(width, height, title, NULL, NULL);
-		if (window == NULL)	
+		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
-		
 		// Initialise the callbacks for the window
 		initCallbacks();
-		
 		// Get the resolution of the primary monitor
 		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		
 		// Center our window
 		glfwSetWindowPos(window,
 			(vidmode.width() - width) / 2,
-			(vidmode.height() - height) / 2
-		);
-
-		glfwMakeContextCurrent(window);	// Make the OpenGL context current
-		
-		if (vSync) {			
-			glfwSwapInterval(1);			// Enable v-sync	
+			(vidmode.height() - height) / 2);
+		glfwMakeContextCurrent(window); // Make the OpenGL context current
+		if (vSync)
+		{
+			glfwSwapInterval(1); // Enable v-sync	
 		}
-		
-		glfwShowWindow(window);			// Make the window visible
+		glfwShowWindow(window); // Make the window visible
 		GL.createCapabilities();
 		loadGLRequiredResources();
-		
 		//Create a new engine to run
-		try {
+		try
+		{
 			engine = createEngine();
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
-		
 		setClearColour(0, 0, 0, 0);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_STENCIL_TEST);
-		
 		if (polygonMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-	
-	
+
 	@Override
-	public boolean shouldClose() {
-		return glfwWindowShouldClose(this.getID());
-	}
-	
-	
+	public boolean shouldClose()
+	{ return glfwWindowShouldClose(this.getID()); }
+
 	@Override
-	public void processEvents() {
-		glfwPollEvents();
-	}
-	
-	
+	public void processEvents()
+	{ glfwPollEvents(); }
+
 	@Override
-	public void swapDisplayBuffers() {
-		glfwSwapBuffers(this.getID());
-	}
-	
-	
-	/**
-	 * Load resources which require GL capabilities to be initialised first.
-	 * This method is automatically called.
-	 */
+	public void swapDisplayBuffers()
+	{ glfwSwapBuffers(this.getID()); }
+
+	/** Load resources which require GL capabilities to be initialised first.
+	 * This method is automatically called. */
 	public abstract void loadGLRequiredResources();
-	
-	
-	/**
-	 * Initialise the callbacks used by this window.
-	 */
-	protected void initCallbacks() {
+
+	/** Initialise the callbacks used by this window. */
+	protected void initCallbacks()
+	{
 		// Setup an error callback. 
 		// The default implementation will print the error message in System.err.
 		errorCallback = GLFWErrorCallback.createPrint(System.err).set();
-		
 		// Setup window callback
-		glfwSetWindowSizeCallback(window, windowSizeCallback = new GLFWWindowSizeCallback() {
+		glfwSetWindowSizeCallback(window, windowSizeCallback = new GLFWWindowSizeCallback()
+		{
 			@Override
-			public void invoke(long window, int width, int height) {
+			public void invoke(long window, int width, int height)
+			{
 				GLFWWindow.this.width = width;
 				GLFWWindow.this.height = height;
 				GLFWWindow.this.setResized(true);
 				glfwSetWindowAspectRatio(window, LWJGLResourceManager.instance().settings().getWidth(), LWJGLResourceManager.instance().settings().getHeight());
 			}
 		});
-				
 		// Create input handlers
 		keyboardHandler = new GLFWKeyboardHandler();
 		mouseHandler = new GLFWMouseHandler();
 		input = new InputHandler(keyboardHandler, mouseHandler);
-		
 		// Setup key callback
-		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
+		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback()
+		{
 			@Override
-			public void invoke(long window, int key, int scancode, int action, int mods) {
-				keyboardHandler.invoke(window, key, scancode, action, mods);
-			}
+			public void invoke(long window, int key, int scancode, int action, int mods)
+			{ keyboardHandler.invoke(window, key, scancode, action, mods); }
 		});
-		
 		// Setup mouse callbacks
-		glfwSetMouseButtonCallback(window, mouseButtonCallback = new GLFWMouseButtonCallback() {
+		glfwSetMouseButtonCallback(window, mouseButtonCallback = new GLFWMouseButtonCallback()
+		{
 			@Override
-			public void invoke(long window, int button, int action, int mods) {
-				mouseHandler.invokeMouseButtonCallback(window, button, action, mods);
-			}
+			public void invoke(long window, int button, int action, int mods)
+			{ mouseHandler.invokeMouseButtonCallback(window, button, action, mods); }
 		});
-		
-		glfwSetScrollCallback(window, scrollCallback = new GLFWScrollCallback() {
+		glfwSetScrollCallback(window, scrollCallback = new GLFWScrollCallback()
+		{
 			@Override
-			public void invoke(long window, double xoffset, double yoffset) {
-				mouseHandler.invokeScrollCallback(window, xoffset, yoffset);
-			}
+			public void invoke(long window, double xoffset, double yoffset)
+			{ mouseHandler.invokeScrollCallback(window, xoffset, yoffset); }
 		});
-
-		glfwSetCursorPosCallback(window, cursorPosCallback = new GLFWCursorPosCallback() {
+		glfwSetCursorPosCallback(window, cursorPosCallback = new GLFWCursorPosCallback()
+		{
 			@Override
-			public void invoke(long window, double xpos, double ypos) {
-				mouseHandler.invokeCursorPosCallback(window, xpos, ypos);
-			}			
+			public void invoke(long window, double xpos, double ypos)
+			{ mouseHandler.invokeCursorPosCallback(window, xpos, ypos); }
 		});
-		
-		glfwSetCursorEnterCallback(window, cursorEnterCallback = new GLFWCursorEnterCallback() {
+		glfwSetCursorEnterCallback(window, cursorEnterCallback = new GLFWCursorEnterCallback()
+		{
 			@Override
-			public void invoke(long window, boolean entered) {
-				mouseHandler.invokeCursorEnterCallback(window, entered);				
-			}
+			public void invoke(long window, boolean entered)
+			{ mouseHandler.invokeCursorEnterCallback(window, entered); }
 		});
-	
 	}
-	
-	
+
 	@Override
-	public final void start() {
+	public final void start()
+	{
 		// Initialise the window
 		init();
-		
 		// Run the engine
 		engine.run();
-		
 		// Dispose the window
 		dispose();
 	}
 
-	
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		glfwFreeCallbacks(window);
 		glfwSetErrorCallback(null).free();
-		
 		// Destroy the window
 		glfwDestroyWindow(window);
-
 		glfwTerminate();
 	}
-	
-	
-	/**
-	 * Sets the clear colour for the window
+
+	/** Sets the clear colour for the window
+	 * 
 	 * @param r
 	 * @param g
 	 * @param b
-	 * @param alpha
-	 */
-	public void setClearColour(float r, float g, float b, float alpha) {
-		glClearColor(r, g, b, alpha);
-	}
-	
-	
-	/**
-	 * Get the window handle
-	 * @return
-	 */
-	public long getID() {
-		return window;
-	}
-	
-	
+	 * @param alpha */
+	public void setClearColour(float r, float g, float b, float alpha)
+	{ glClearColor(r, g, b, alpha); }
+
+	/** Get the window handle
+	 * 
+	 * @return */
+	public long getID()
+	{ return window; }
+
 	@Override
-	protected void setWindowTitle(String title) {
-		glfwSetWindowTitle(window, title);
-	}
-	
-	
-	/**
-	 * Checks if vSync is enabled for this window
-	 * @return
-	 */
-	public boolean isVSync() {
-		return vSync;
-	}
-	
+	protected void setWindowTitle(String title)
+	{ glfwSetWindowTitle(window, title); }
+
+	/** Checks if vSync is enabled for this window
+	 * 
+	 * @return */
+	public boolean isVSync()
+	{ return vSync; }
 }

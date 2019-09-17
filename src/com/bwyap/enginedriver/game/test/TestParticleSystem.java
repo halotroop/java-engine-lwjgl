@@ -5,12 +5,11 @@ import org.joml.Vector3f;
 import com.bwyap.lwjgl.engine.particle.ParticleSystem;
 import com.bwyap.lwjgl.engine.render3d.LWJGLTexture;
 
-public class TestParticleSystem extends ParticleSystem<TestParticle> {
-
-	
-	public TestParticleSystem(LWJGLTexture texture) throws Exception {
+public class TestParticleSystem extends ParticleSystem<TestParticle>
+{
+	public TestParticleSystem(LWJGLTexture texture) throws Exception
+	{
 		super(texture, 2000, 10, 0.01f);
-		
 		this.setActive(true);
 		this.setParticleLifetime(2f, 0);
 		this.setBaseVelocity(new Vector3f(0, 1f, 0));
@@ -22,16 +21,14 @@ public class TestParticleSystem extends ParticleSystem<TestParticle> {
 		this.setParticleRadius(0.1f, 0.1f);
 		this.setEmitRadius(1f);
 	}
-	
-	
+
 	@Override
-	protected void setMesh() throws Exception {
-		this.setMesh("particle");
-	}
-	
-	
+	protected void setMesh() throws Exception
+	{ this.setMesh("particle"); }
+
 	@Override
-	protected TestParticle generateNewParticle(float now) {
+	protected TestParticle generateNewParticle(float now)
+	{
 		TestParticle p = new TestParticle(now, (rand.nextFloat() * (particleLifetimeMax - particleLifetimeMin)) + particleLifetimeMin);
 		p.setColour(generateColour());
 		p.setRadius(generateRadius());
@@ -39,5 +36,4 @@ public class TestParticleSystem extends ParticleSystem<TestParticle> {
 		p.setVelocity(generateStartVelocity());
 		return p;
 	}
-
 }

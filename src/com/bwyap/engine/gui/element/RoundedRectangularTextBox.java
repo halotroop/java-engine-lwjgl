@@ -4,34 +4,27 @@ import com.bwyap.engine.gui.element.base.TextBox;
 import com.bwyap.engine.gui.element.vector.VectorTextBox;
 import com.bwyap.engine.gui.interfaces.IVectorRoundedRect;
 
-
-/**
- * A rounded rectangular text box.
+/** A rounded rectangular text box.
  * See {@link TextBox}.
- * @author bwyap
- *
- */
-public abstract class RoundedRectangularTextBox extends VectorTextBox implements IVectorRoundedRect{
-	
+ * 
+ * @author bwyap */
+public abstract class RoundedRectangularTextBox extends VectorTextBox implements IVectorRoundedRect
+{
 	private float radius;
-	
-	public RoundedRectangularTextBox(float x, float y, float width, float height, float radius, float padding) {
+
+	public RoundedRectangularTextBox(float x, float y, float width, float height, float radius, float padding)
+	{
 		super(x, y, width, height, padding);
 		this.radius = radius;
 	}
-	
-	
-	/**
-	 * Set the radius of the rounded rectangle
-	 * @param radius
-	 */
-	public void setRadius(float radius) {
-		this.radius = radius;
-	}
-	
-	
+
+	/** Set the radius of the rounded rectangle
+	 * 
+	 * @param radius */
+	public void setRadius(float radius)
+	{ this.radius = radius; }
+
 	@Override
-	public float getRadius() {
-		return radius;
-	}
+	public float getRadius()
+	{ return radius; }
 }
