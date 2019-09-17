@@ -142,7 +142,7 @@ public abstract class ParticleSystemLogic<T extends Particle> {
 			
 			Vector3f pos = new Vector3f(rand.nextFloat() * (rand.nextInt(3) - 1), rand.nextFloat() * (rand.nextInt(3) - 1), rand.nextFloat() * (rand.nextInt(3) - 1));
 			Quaternionf rotation = new Quaternionf();
-			rotation.rotate(xAngle, yAngle, zAngle);
+			rotation.rotateXYZ(xAngle, yAngle, zAngle);
 			pos.rotate(rotation);
 			pos.normalize().mul(rand.nextFloat() * emitRadius);
 			
@@ -182,7 +182,7 @@ public abstract class ParticleSystemLogic<T extends Particle> {
 			
 			Vector3f velocity = new Vector3f(baseVelocity);
 			Quaternionf rotation = new Quaternionf();
-			rotation.rotate(xAngle, yAngle, zAngle);
+			rotation.rotateXYZ(xAngle, yAngle, zAngle);
 			velocity.rotate(rotation);
 			float speed = baseVelocity.length() * (speedVariance > 0 ? ((speedVariance/2) * rand.nextFloat()) + (speedVariance/2) : 1) ;
 			return velocity.normalize().mul(speed);

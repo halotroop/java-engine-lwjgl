@@ -16,11 +16,10 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.newdawn.slick.opengl.PNGDecoder;
+
 import com.bwyap.engine.render.Texture;
 import com.bwyap.utility.resource.ResourceLoader;
-
-import de.matthiasmann.twl.utils.PNGDecoder;
-import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
 
 /**
@@ -100,7 +99,7 @@ public class LWJGLTexture extends Texture {
 		PNGDecoder decoder = new PNGDecoder(ResourceLoader.class.getResourceAsStream(path));
 		
 		ByteBuffer buf = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
-		decoder.decode(buf, decoder.getWidth() * 4, Format.RGBA);
+		decoder.decode(buf, decoder.getWidth() * 4, PNGDecoder.RGBA);
 		buf.flip();
 		
 		// Create a new OpenGL texture
